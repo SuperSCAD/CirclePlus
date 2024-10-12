@@ -36,7 +36,7 @@ class PieSlice(ScadWidget):
         Object constructor.
 
         :param height: The height of the pie slice. If height is None, a 2D widget will be created.
-        :param angle: The angle of the pie slice (implies starting angle is 0.0).
+        :param angle: The angle of the pie slice (implies the starting angle is 0.0).
         :param start_angle: The start angle of the pie slice.
         :param end_angle: The end angle of the pie slice.
         :param radius: The radius of the pie slice (implies inner radius is 0.0).
@@ -63,7 +63,7 @@ class PieSlice(ScadWidget):
     @property
     def height(self) -> float | None:
         """
-        Returns teh height of the pie slice. If height is None, a 2D widget will be created.
+        Returns the height of the pie slice. If height is None, a 2D widget will be created.
         """
         return self.uc(self._args.get('height'))
 

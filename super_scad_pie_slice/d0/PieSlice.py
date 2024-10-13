@@ -15,7 +15,7 @@ from super_scad.type.Point2 import Point2
 
 class PieSlice(ScadWidget):
     """
-    Widget for creating 2D and 3D pie slices.
+    Widget for creating 2D circle sectors and 3D pie slices.
     """
 
     # ------------------------------------------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 # SuperSCAD: PieSlice
 
-SuperSCAD widgets for 2D and 3D pie slices.
+SuperSCAD widgets for 2D circle sectors and 3D pie slices with any angle and in any quadrant.
 
 <table>
 <thead>
@@ -26,6 +26,8 @@ SuperSCAD widgets for 2D and 3D pie slices.
 </tr>
 </tbody>
 </table>
+
+![Demo.](/docs/images/demo.gif "Demo")
 
 # License
 

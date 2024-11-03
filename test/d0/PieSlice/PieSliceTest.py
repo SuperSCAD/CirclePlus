@@ -1,3 +1,4 @@
+from super_scad.scad.Context import Context
 from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
 
@@ -18,7 +19,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=10.0, end_angle=80.0, inner_radius=10.0, outer_radius=30.0, fn4n=True)
 
         self.assertIsNone(pie_slice.height)
@@ -44,7 +45,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(height=10.0, start_angle=10.0, end_angle=80.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(10.0, pie_slice.height)
@@ -69,7 +70,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=10.0, end_angle=80.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -94,7 +95,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=100.0, end_angle=170.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -119,7 +120,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=190.0, end_angle=260.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -144,7 +145,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=280.0, end_angle=350.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -169,7 +170,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=0.0, end_angle=90.0, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -194,7 +195,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=90.0, end_angle=180.0, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -219,7 +220,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=180.0, end_angle=270.0, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -244,7 +245,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=270.0, end_angle=360.0, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -269,7 +270,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=0.0, end_angle=180.0, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -294,7 +295,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=90.0, end_angle=270.0, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -319,7 +320,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=180.0, end_angle=360.0, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -344,7 +345,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=270.0, end_angle=90.0, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -369,7 +370,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=0.0, end_angle=270.0, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -394,7 +395,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=90.0, end_angle=360.0, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -419,7 +420,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=180.0, end_angle=90.0, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -444,7 +445,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=270.0, end_angle=180.0, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -469,7 +470,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=0.0, end_angle=360.0 - 1e-8, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -494,7 +495,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=80.0, end_angle=100.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -519,7 +520,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=170.0, end_angle=190.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -544,7 +545,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=260.0, end_angle=280.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -569,7 +570,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=180.01, end_angle=89.99, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -594,7 +595,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=269.99, end_angle=0.01, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -619,7 +620,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=350.0, end_angle=370.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -644,7 +645,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=270.01, end_angle=89.99, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -669,7 +670,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=15.0, end_angle=265.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -694,7 +695,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=0.01, end_angle=269.99, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -719,7 +720,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=89.99, end_angle=180.01, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -744,7 +745,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=105, end_angle=355.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -769,7 +770,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=90.01, end_angle=-0.01, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -794,7 +795,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=179.99, end_angle=-89.99, inner_radius=10.0, outer_radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -819,7 +820,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(angle=-20, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -844,7 +845,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(angle=20, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -869,7 +870,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=25, end_angle=15, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -894,7 +895,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=25, end_angle=0.0, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -919,7 +920,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=110, end_angle=95, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -944,7 +945,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=269, end_angle=181, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -969,7 +970,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=-30, end_angle=-40, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -994,7 +995,7 @@ class PieSliceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = PieSlice(start_angle=0.0, end_angle=-40, radius=30.0)
 
         self.assertIsNone(pie_slice.height)
@@ -1016,7 +1017,7 @@ class PieSliceTest(ScadTestCase):
     def testImperialMetricPieSlice2D(self):
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = ImperialPieSlice(start_angle=15.0,
                                      end_angle=-15.0,
                                      radius=30.0,
@@ -1047,7 +1048,7 @@ class PieSliceTest(ScadTestCase):
     def testImperialMetricPieSlice3D(self):
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = Scad(context=Context())
         pie_slice = ImperialPieSlice(height=10.0,
                                      start_angle=15.0,
                                      end_angle=-15.0,
@@ -1079,7 +1080,7 @@ class PieSliceTest(ScadTestCase):
     def testImperialImperialPieSlice2D(self):
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.INCH)
+        scad = Scad(context=Context(unit_length_final=Unit.INCH))
         pie_slice = ImperialPieSlice(start_angle=15.0,
                                      end_angle=-15.0,
                                      radius=30.0,
@@ -1110,7 +1111,7 @@ class PieSliceTest(ScadTestCase):
     def testImperialImperialPieSlice3D(self):
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.INCH)
+        scad = Scad(context=Context(unit_length_final=Unit.INCH))
         pie_slice = ImperialPieSlice(height=10.0,
                                      start_angle=15.0,
                                      end_angle=-15.0,

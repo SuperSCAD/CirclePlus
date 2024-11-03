@@ -10,7 +10,7 @@ from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Angle import Angle
-from super_scad.type.Point2 import Point2
+from super_scad.type.Vector2 import Vector2
 
 
 class PieSlice(ScadWidget):
@@ -172,10 +172,10 @@ class PieSlice(ScadWidget):
         start_angle = self.start_angle
         end_angle = self.end_angle
 
-        if self.outer_radius <= 0.0 or angle == 0.0:  # xxx Use rounding in target units.
+        if round(self.outer_radius, context.length_digits) <= 0.0 or round(angle, context.angle_digits) == 0.0:
             return Empty()
 
-        if self.inner_radius == 0.0:  # xxx Use rounding in target units.
+        if round(self.inner_radius, context.length_digits) == 0.0:
             circles = Circle(radius=self.outer_radius, fa=self.fa, fs=self.fs, fn=self.fn, fn4n=self.fn4n)
         else:
             circles = Difference(children=[Circle(radius=self.outer_radius,
@@ -189,61 +189,61 @@ class PieSlice(ScadWidget):
                                                   fn=self.fn,
                                                   fn4n=self.fn4n)])
 
-        if round(angle - 360.0, 4) == 0.0:  # xxx Use rounding in target units.
+        if round(angle - 360.0, context.angle_digits) == 0.0:
             return circles
 
-        if round(angle - 90.0, 4) < 0.0:  # xxx Use rounding in target units.
+        if round(angle - 90.0, context.angle_digits) < 0.0:
             size2 = (self.outer_radius + context.eps) / math.cos(math.radians(Angle.normalize(angle, 90.0) / 2.0))
-            points = [Point2(0.0, 0.0),
-                      Point2.from_polar_coordinates(size2, start_angle),
-                      Point2.from_polar_coordinates(size2, end_angle)]
+            points = [Vector2(0.0, 0.0),
+                      Vector2.from_polar_coordinates(size2, start_angle),
+                      Vector2.from_polar_coordinates(size2, end_angle)]
 
-        elif round(angle - 90.0, 4) == 0.0:  # xxx Use rounding in target units.
+        elif round(angle - 90.0, context.angle_digits) == 0.0:
             size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
             size2 = self.outer_radius + context.eps
-            points = [Point2(0.0, 0.0),
-                      Point2.from_polar_coordinates(size2, start_angle),
-                      Point2.from_polar_coordinates(size1, start_angle + 45.0),
-                      Point2.from_polar_coordinates(size2, end_angle)]
+            points = [Vector2(0.0, 0.0),
+                      Vector2.from_polar_coordinates(size2, start_angle),
+                      Vector2.from_polar_coordinates(size1, start_angle + 45.0),
+                      Vector2.from_polar_coordinates(size2, end_angle)]
 
-        elif round(angle - 180.0, 4) == 0.0:  # xxx Use rounding in target units.
+        elif round(angle - 180.0, context.angle_digits) == 0.0:
             size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
             size2 = self.outer_radius + context.eps
-            points = [Point2.from_polar_coordinates(size2, start_angle),
-                      Point2.from_polar_coordinates(size1, start_angle + 45.0),
-                      Point2.from_polar_coordinates(size1, start_angle + 135.0),
-                      Point2.from_polar_coordinates(size2, end_angle)]
+            points = [Vector2.from_polar_coordinates(size2, start_angle),
+                      Vector2.from_polar_coordinates(size1, start_angle + 45.0),
+                      Vector2.from_polar_coordinates(size1, start_angle + 135.0),
+                      Vector2.from_polar_coordinates(size2, end_angle)]
 
-        elif round(angle - 270.0, 4) == 0.0:  # xxx Use rounding in target units.
+        elif round(angle - 270.0, context.angle_digits) == 0.0:
             size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
             size2 = self.outer_radius + context.eps
-            points = [Point2(0.0, 0.0),
-                      Point2.from_polar_coordinates(size2, start_angle),
-                      Point2.from_polar_coordinates(size1, start_angle + 45.0),
-                      Point2.from_polar_coordinates(size1, start_angle + 135.0),
-                      Point2.from_polar_coordinates(size1, start_angle + 225.0),
-                      Point2.from_polar_coordinates(size2, end_angle)]
+            points = [Vector2(0.0, 0.0),
+                      Vector2.from_polar_coordinates(size2, start_angle),
+                      Vector2.from_polar_coordinates(size1, start_angle + 45.0),
+                      Vector2.from_polar_coordinates(size1, start_angle + 135.0),
+                      Vector2.from_polar_coordinates(size1, start_angle + 225.0),
+                      Vector2.from_polar_coordinates(size2, end_angle)]
 
-        elif round(angle - 180.0, 4) < 0.0:  # xxx Use rounding in target units.
+        elif round(angle - 180.0, context.angle_digits) < 0.0:
             phi = Angle.normalize((start_angle - end_angle) / 2.0, 90.0)
             size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
             size2 = size1 / (math.cos(math.radians(phi)) + math.sin(math.radians(phi)))
-            points = [Point2(0.0, 0.0),
-                      Point2.from_polar_coordinates(size2, start_angle),
-                      Point2.from_polar_coordinates(size1, start_angle - phi + 90.0),
-                      Point2.from_polar_coordinates(size1, start_angle - phi + 180.0),
-                      Point2.from_polar_coordinates(size2, end_angle)]
+            points = [Vector2(0.0, 0.0),
+                      Vector2.from_polar_coordinates(size2, start_angle),
+                      Vector2.from_polar_coordinates(size1, start_angle - phi + 90.0),
+                      Vector2.from_polar_coordinates(size1, start_angle - phi + 180.0),
+                      Vector2.from_polar_coordinates(size2, end_angle)]
 
-        elif round(angle - 360.0, 4) < 0.0:  # xxx Use rounding in target units.
+        elif round(angle - 360.0, context.angle_digits) < 0.0:
             phi = Angle.normalize((start_angle - end_angle) / 2.0, 90.0)
             size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
             size2 = size1 / (math.cos(math.radians(phi)) + math.sin(math.radians(phi)))
-            points = [Point2(0.0, 0.0),
-                      Point2.from_polar_coordinates(size2, start_angle),
-                      Point2.from_polar_coordinates(size1, start_angle - phi + 90.0),
-                      Point2.from_polar_coordinates(size1, start_angle - phi + 180.0),
-                      Point2.from_polar_coordinates(size1, start_angle - phi + 270.0),
-                      Point2.from_polar_coordinates(size2, end_angle)]
+            points = [Vector2(0.0, 0.0),
+                      Vector2.from_polar_coordinates(size2, start_angle),
+                      Vector2.from_polar_coordinates(size1, start_angle - phi + 90.0),
+                      Vector2.from_polar_coordinates(size1, start_angle - phi + 180.0),
+                      Vector2.from_polar_coordinates(size1, start_angle - phi + 270.0),
+                      Vector2.from_polar_coordinates(size2, end_angle)]
 
         else:
             raise ValueError('Math is broken!')

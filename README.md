@@ -1,6 +1,6 @@
-# SuperSCAD: PieSlice
+# SuperSCAD: CircleSector
 
-SuperSCAD widgets for 2D circle sectors and 3D pie slices with any angle and in any quadrant.
+SuperSCAD widget for circle sectors with any angle and in any quadrant.
 
 <table>
 <thead>
@@ -13,15 +13,15 @@ SuperSCAD widgets for 2D circle sectors and 3D pie slices with any angle and in 
 <tbody>
 <tr>
 <td>
-<a href="https://pypi.org/project/Super-SCAD-Pie-Slice/" target="_blank"><img alt="PyPI - License" src="https://img.shields.io/pypi/l/Super-SCAD-Pie-Slice">
+<a href="https://pypi.org/project/Super-SCAD-Circle-Sector/" target="_blank"><img alt="PyPI - License" src="https://img.shields.io/pypi/l/Super-SCAD-Circle-Sector">
 </a>
 </td>
 <td>
-<a href="https://badge.fury.io/py/Super-SCAD-Pie-Slice" target="_blank"><img src="https://badge.fury.io/py/Super-SCAD-Pie-Slice.svg" alt="Latest Stable Version"/></a><br/>
+<a href="https://badge.fury.io/py/Super-SCAD-Circle-Sector" target="_blank"><img src="https://badge.fury.io/py/Super-SCAD-Circle-Sector.svg" alt="Latest Stable Version"/></a><br/>
 </td>
 <td>
-<a href="https://codecov.io/gh/SuperSCAD/PieSlice" target="_blank"><img src="https://codecov.io/gh/SuperSCAD/PieSlice/graph/badge.svg?token=7D8V8RRY11" alt="Code Coverage"/></a>
-<a href="https://github.com/SuperSCAD/PieSlice/actions/workflows/unit.yml"><img src="https://github.com/SuperSCAD/PieSlice/actions/workflows/unit.yml/badge.svg" alt="unit Tests"/></a>
+<a href="https://codecov.io/gh/SuperSCAD/CircleSector" target="_blank"><img src="https://codecov.io/gh/SuperSCAD/CircleSector/graph/badge.svg?token=7D8V8RRY11" alt="Code Coverage"/></a>
+<a href="https://github.com/SuperSCAD/CircleSector/actions/workflows/unit.yml"><img src="https://github.com/SuperSCAD/CircleSector/actions/workflows/unit.yml/badge.svg" alt="unit Tests"/></a>
 </td>
 </tr>
 </tbody>

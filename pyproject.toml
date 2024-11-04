@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "Super-SCAD-Pie-Slice"
+name = "Super-SCAD-Circle-Sector"
 version = "0.0.0"
-description = "SuperSCAD widgets for 2D and 3D pie slices."
+description = "SuperSCAD widget for circle sectors."
 authors = ["P.R. Water <p.r.water@setbased.nl>"]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/SuperSCAD/PieSlice"
+repository = "https://github.com/SuperSCAD/CircleSector"
 documentation = "https://superscad.readthedocs.io/"
-keywords = ["OpenSCAD", "SuperSCAD", "Pie Slice"]
+keywords = ["OpenSCAD", "SuperSCAD", "Circle Sector"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
@@ -22,12 +22,10 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.10.0"
-super-scad = "^0.8.1"
+super-scad = "^0.8.3"
 
 [tool.poetry.group.dev.dependencies]
 coverage = "^7.5.4"
-sphinx = "^8.1.3"
-sphinx-rtd-theme = "^3.0.1"
 
 [build-system]
 requires = ["poetry-core"]

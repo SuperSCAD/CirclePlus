@@ -5,7 +5,6 @@ from super_scad.boolean.Empty import Empty
 from super_scad.boolean.Intersection import Intersection
 from super_scad.d2.Circle import Circle
 from super_scad.d2.Polygon import Polygon
-from super_scad.d3.LinearExtrude import LinearExtrude
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
@@ -13,15 +12,14 @@ from super_scad.type.Angle import Angle
 from super_scad.type.Vector2 import Vector2
 
 
-class PieSlice(ScadWidget):
+class CircleSector(ScadWidget):
     """
-    Widget for creating 2D circle sectors and 3D pie slices.
+    Widget for creating circle sectors.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 height: float | None = None,
                  angle: float | None = None,
                  start_angle: float | None = None,
                  end_angle: float | None = None,
@@ -35,7 +33,6 @@ class PieSlice(ScadWidget):
         """
         Object constructor.
 
-        :param height: The height of the pie slice. If height is None, a 2D widget will be created.
         :param angle: The angle of the pie slice (implies the starting angle is 0.0).
         :param start_angle: The start angle of the pie slice.
         :param end_angle: The end angle of the pie slice.
@@ -58,14 +55,6 @@ class PieSlice(ScadWidget):
         admission.validate_exclusive({'angle'}, {'start_angle', 'end_angle'})
         admission.validate_exclusive({'radius'}, {'inner_radius', 'outer_radius'})
         admission.validate_required({'radius', 'outer_radius'}, {'angle', 'end_angle'})
-
-    # ------------------------------------------------------------------------------------------------------------------
-    @property
-    def height(self) -> float | None:
-        """
-        Returns the height of the pie slice. If height is None, a 2D widget will be created.
-        """
-        return self.uc(self._args.get('height'))
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -248,11 +237,6 @@ class PieSlice(ScadWidget):
         else:
             raise ValueError('Math is broken!')
 
-        pie_slice = Intersection(children=[circles, Polygon(points=points, convexity=self.convexity)])
-
-        if self.height is None:
-            return pie_slice
-
-        return LinearExtrude(height=self.height, child=pie_slice)
+        return Intersection(children=[circles, Polygon(points=points, convexity=self.convexity)])
 
 # ----------------------------------------------------------------------------------------------------------------------

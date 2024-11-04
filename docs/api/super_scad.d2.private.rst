@@ -4,10 +4,10 @@ super\_scad.d2.private package
 Submodules
 ----------
 
-super\_scad.d2.private.PrivatePieSlice2D module
+super\_scad.d2.private.PrivateCircleSector2D module
 -----------------------------------------------
 
-.. automodule:: super_scad.d2.private.PrivatePieSlice2D
+.. automodule:: super_scad.d2.private.PrivateCircleSector2D
    :members:
    :undoc-members:
    :show-inheritance:

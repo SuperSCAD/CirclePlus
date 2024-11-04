@@ -2,18 +2,17 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 
-from super_scad_pie_slice.d0.PieSlice import PieSlice
+from super_scad_circle_sector.CircleSector import CircleSector
 
 
-class ImperialPieSlice(ScadWidget):
+class ImperialCircleSector(ScadWidget):
     """
-    Class for imperial pie slices.
+    Class for imperial circle sector.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 height: float | None = None,
                  angle: float | None = None,
                  start_angle: float | None = None,
                  end_angle: float | None = None,
@@ -28,7 +27,7 @@ class ImperialPieSlice(ScadWidget):
         """
         ScadWidget.__init__(self, args=locals())
 
-        self.imperial_pie_slice: PieSlice | None = None
+        self.imperial_circle_sector: CircleSector | None = None
         """
         The imperial sphere.
         """
@@ -42,17 +41,16 @@ class ImperialPieSlice(ScadWidget):
         """
         Context.set_unit_length_current(Unit.INCH)
 
-        self.imperial_pie_slice = PieSlice(height=self._args.get('height'),
-                                           angle=self._args.get('angle'),
-                                           start_angle=self._args.get('start_angle'),
-                                           end_angle=self._args.get('end_angle'),
-                                           radius=self._args.get('radius'),
-                                           inner_radius=self._args.get('inner_radius'),
-                                           outer_radius=self._args.get('outer_radius'),
-                                           fa=self._args.get('fa'),
-                                           fs=self._args.get('fs'),
-                                           fn=self._args.get('fn'))
+        self.imperial_circle_sector = CircleSector(angle=self._args.get('angle'),
+                                                   start_angle=self._args.get('start_angle'),
+                                                   end_angle=self._args.get('end_angle'),
+                                                   radius=self._args.get('radius'),
+                                                   inner_radius=self._args.get('inner_radius'),
+                                                   outer_radius=self._args.get('outer_radius'),
+                                                   fa=self._args.get('fa'),
+                                                   fs=self._args.get('fs'),
+                                                   fn=self._args.get('fn'))
 
-        return self.imperial_pie_slice
+        return self.imperial_circle_sector
 
 # ----------------------------------------------------------------------------------------------------------------------

@@ -92,18 +92,18 @@ super\_scad.d3.LinearExtrude module
    :undoc-members:
    :show-inheritance:
 
-super\_scad.d3.PieSlice3D module
+super\_scad.d3.CircleSector3D module
 --------------------------------
 
-.. automodule:: super_scad.d3.PieSlice3D
+.. automodule:: super_scad.d3.CircleSector3D
    :members:
    :undoc-members:
    :show-inheritance:
 
-super\_scad.d3.PieSlice3D4n module
+super\_scad.d3.CircleSector3D4n module
 ----------------------------------
 
-.. automodule:: super_scad.d3.PieSlice3D4n
+.. automodule:: super_scad.d3.CircleSector3D4n
    :members:
    :undoc-members:
    :show-inheritance:

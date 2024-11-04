@@ -10,7 +10,7 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath('../'))
-sys.path.insert(0, os.path.abspath('../super_scad_pie_slice'))
+sys.path.insert(0, os.path.abspath('../super_scad_circle_sector'))
 
 
 project = 'SuperSCAD'

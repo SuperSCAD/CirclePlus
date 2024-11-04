@@ -52,18 +52,18 @@ super\_scad.d2.Import2D module
    :undoc-members:
    :show-inheritance:
 
-super\_scad.d2.PieSlice2D module
+super\_scad.d2.CircleSector2D module
 --------------------------------
 
-.. automodule:: super_scad.d2.PieSlice2D
+.. automodule:: super_scad.d2.CircleSector2D
    :members:
    :undoc-members:
    :show-inheritance:
 
-super\_scad.d2.PieSlice2D4n module
+super\_scad.d2.CircleSector2D4n module
 ----------------------------------
 
-.. automodule:: super_scad.d2.PieSlice2D4n
+.. automodule:: super_scad.d2.CircleSector2D4n
    :members:
    :undoc-members:
    :show-inheritance:

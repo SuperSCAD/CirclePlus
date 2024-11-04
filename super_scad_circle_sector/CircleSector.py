@@ -8,6 +8,8 @@ from super_scad.d2.Polygon import Polygon
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
+from super_scad.transformation.Rotate2D import Rotate2D
+from super_scad.transformation.Translate2D import Translate2D
 from super_scad.type.Angle import Angle
 from super_scad.type.Vector2 import Vector2
 
@@ -26,6 +28,8 @@ class CircleSector(ScadWidget):
                  radius: float | None = None,
                  inner_radius: float | None = None,
                  outer_radius: float | None = None,
+                 rotation: float | None = None,
+                 position: Vector2 | None = None,
                  fa: float | None = None,
                  fs: float | None = None,
                  fn: int | None = None,
@@ -33,12 +37,14 @@ class CircleSector(ScadWidget):
         """
         Object constructor.
 
-        :param angle: The angle of the pie slice (implies the starting angle is 0.0).
-        :param start_angle: The start angle of the pie slice.
-        :param end_angle: The end angle of the pie slice.
-        :param radius: The radius of the pie slice (implies inner radius is 0.0).
-        :param inner_radius: The inner radius of the pie slice.
-        :param outer_radius: The outer radius of the pie slice.
+        :param angle: The angle of the circle sector (implies the starting angle is 0.0).
+        :param start_angle: The start angle of the circle sector.
+        :param end_angle: The end angle of the circle sector.
+        :param radius: The radius of the circle sector (implies inner radius is 0.0).
+        :param inner_radius: The inner radius of the circle sector.
+        :param outer_radius: The outer radius of the circle sector.
+        :param rotation: The angle of rotation.
+        :param position: The position of the circle sector.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
@@ -60,7 +66,7 @@ class CircleSector(ScadWidget):
     @property
     def angle(self) -> float:
         """
-        Returns the angle of the pie slice.
+        Returns the angle of the circle sector.
         """
         return Angle.normalize(self.end_angle - self.start_angle)
 
@@ -68,7 +74,7 @@ class CircleSector(ScadWidget):
     @property
     def start_angle(self) -> float:
         """
-        Returns the start angle of the pie slice.
+        Returns the start angle of the circle sector.
         """
         if 'angle' in self._args:
             return Angle.normalize(self._args['angle']) if self._args['angle'] < 0.0 else 0.0
@@ -79,7 +85,7 @@ class CircleSector(ScadWidget):
     @property
     def end_angle(self) -> float:
         """
-        Returns the end angle of the pie slice.
+        Returns the end angle of the circle sector.
         """
         if 'angle' in self._args:
             return Angle.normalize(self._args['angle']) if self._args['angle'] > 0.0 else 0.0
@@ -90,7 +96,7 @@ class CircleSector(ScadWidget):
     @property
     def radius(self) -> float:
         """
-        Returns the outer radius of the pie slice.
+        Returns the outer radius of the circle sector.
         """
         return self.outer_radius
 
@@ -98,7 +104,7 @@ class CircleSector(ScadWidget):
     @property
     def inner_radius(self) -> float:
         """
-        Returns the inner radius of the pie slice.
+        Returns the inner radius of this circle sector.
         """
         return self.uc(self._args.get('inner_radius', 0.0))
 
@@ -106,17 +112,25 @@ class CircleSector(ScadWidget):
     @property
     def outer_radius(self) -> float:
         """
-        Returns the outer radius of the pie slice.
+        Returns the outer radius of this circle sector.
         """
         return self.uc(self._args.get('outer_radius', self._args.get('radius', 0.0)))
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def convexity(self) -> int:
+    def rotation(self) -> float:
         """
-        Returns the convexity of the pie slice.
+        Returns the angle of rotation.
         """
-        return 1 if self.angle < 180.0 else 2
+        return self._args.get('rotation', 0.0)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def position(self) -> Vector2:
+        """
+        Returns position this circle sector.
+        """
+        return self.uc(self._args.get('position', Vector2.origin))
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -149,6 +163,14 @@ class CircleSector(ScadWidget):
         Returns the fixed number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
         """
         return self._args.get('fn')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def convexity(self) -> int:
+        """
+        Returns the convexity of the pie slice.
+        """
+        return 1 if self.angle < 180.0 else 2
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
@@ -237,6 +259,14 @@ class CircleSector(ScadWidget):
         else:
             raise ValueError('Math is broken!')
 
-        return Intersection(children=[circles, Polygon(points=points, convexity=self.convexity)])
+        circle_sector = Intersection(children=[circles, Polygon(points=points, convexity=self.convexity)])
+
+        if self.rotation != 0.0:
+            circle_sector = Rotate2D(angle=self.rotation, child=circle_sector)
+
+        if self.position.is_not_origin:
+            circle_sector = Translate2D(vector=self.position, child=circle_sector)
+
+        return circle_sector
 
 # ----------------------------------------------------------------------------------------------------------------------

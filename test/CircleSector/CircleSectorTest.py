@@ -13,7 +13,7 @@ class CircleSectorTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSector4n(self):
+    def test_circle_sector4n(self):
         """
         Test a pie slice based on a circle with a multiple of 4 vertices.
         """
@@ -38,7 +38,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ1(self):
+    def test_circle_sector_q1(self):
         """
         Test a pie slice that start lies quadrant 1.
         """
@@ -62,7 +62,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ2(self):
+    def test_circle_sector_q2(self):
         """
         Test a pie slice that start lies quadrant 2.
         """
@@ -86,7 +86,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ3(self):
+    def test_circle_sector_q3(self):
         """
         Test a pie slice that start lies quadrant 3.
         """
@@ -110,7 +110,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ4(self):
+    def test_circle_sector_q4(self):
         """
         Test a pie slice that start lies quadrant 4.
         """
@@ -134,7 +134,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorIsQ1(self):
+    def test_circle_sector_is_q1(self):
         """
         Test a pie slice that is quadrant 1.
         """
@@ -158,7 +158,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorIsQ2(self):
+    def test_circle_sector_is_q2(self):
         """
         Test a pie slice that is quadrant 2.
         """
@@ -182,7 +182,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorIsQ3(self):
+    def test_circle_sector_is_q3(self):
         """
         Test a pie slice that is quadrant 3.
         """
@@ -206,7 +206,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorIsQ4(self):
+    def test_circle_sector_is_q4(self):
         """
         Test a pie slice that is quadrant 4.
         """
@@ -230,7 +230,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorIsQ1Q2(self):
+    def test_circle_sector_is_q1_q2(self):
         """
         Test a pie slice that is quadrant 1 & 2.
         """
@@ -254,7 +254,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorIsQ2Q3(self):
+    def test_circle_sector_is_q2_q3(self):
         """
         Test a pie slice that is quadrant 2 & 3.
         """
@@ -278,7 +278,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorIsQ3Q4(self):
+    def test_circle_sector_is_q3_q4(self):
         """
         Test a pie slice that is quadrant 3 & 4.
         """
@@ -302,7 +302,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorIsQ4Q1(self):
+    def test_circle_sector_is_q4_q1(self):
         """
         Test a pie slice that is quadrant 3 & 4.
         """
@@ -326,7 +326,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorIsQ1Q2Q3(self):
+    def test_circle_sector_is_q1_q2_q3(self):
         """
         Test a pie slice that is quadrant 1, 2, & 3.
         """
@@ -350,7 +350,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorIsQ2Q3Q4(self):
+    def test_circle_sector_is_q2_q3_q4(self):
         """
         Test a pie slice that is quadrant 2, 3 & 4.
         """
@@ -374,7 +374,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorIsQ3Q4Q1(self):
+    def test_circle_sector_is_q3_q4_q1(self):
         """
         Test a pie slice that is quadrant 3, 4 & 1.
         """
@@ -398,7 +398,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorIsQ4Q1Q2(self):
+    def test_circle_sector_is_q4_q1_q2(self):
         """
         Test a pie slice that is quadrant 4, 1 & 2.
         """
@@ -422,7 +422,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorIsQ1Q2Q3Q4(self):
+    def test_circle_sector_is_q1_q2_q3_q4(self):
         """
         Test a pie slice that is quadrant 1, 2, 3, & 4.
         """
@@ -446,7 +446,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ1Q2(self):
+    def test_circle_sector_q1_q2(self):
         """
         Test a pie slice that start in quadrant 1 and ends in quadrant 2.
         """
@@ -470,7 +470,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ2Q3(self):
+    def test_circle_sector_q2_q3(self):
         """
         Test a pie slice that start in quadrant 2 and ends in quadrant 3.
         """
@@ -494,7 +494,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ3Q4(self):
+    def test_circle_sector_q3_q4(self):
         """
         Test a pie slice that start in quadrant 3 and ends in quadrant 4.
         """
@@ -518,7 +518,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ3Q1b(self):
+    def test_circle_sector_q3_q1b(self):
         """
         Test a pie slice that start in quadrant 3 and ends in quadrant 1.
         """
@@ -542,7 +542,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ3Q1c(self):
+    def test_circle_sector_q3_q1c(self):
         """
         Test a pie slice that start in quadrant 3 and ends in quadrant 1.
         """
@@ -566,7 +566,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ4Q1a(self):
+    def test_circle_sector_q4_q1a(self):
         """
         Test a pie slice that start in quadrant 4 and ends in quadrant 1.
         """
@@ -590,7 +590,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ4Q1b(self):
+    def test_circle_sector_q4_q1b(self):
         """
         Test a pie slice that start in quadrant 4 and ends in quadrant 1.
         """
@@ -614,7 +614,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ1Q3a(self):
+    def test_circle_sector_q1_q3a(self):
         """
         Test a pie slice that start in quadrant 1 and ends in quadrant 3.
         """
@@ -638,7 +638,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ1Q3b(self):
+    def test_circle_sector_q1_q3b(self):
         """
         Test a pie slice that start in quadrant 1 and ends in quadrant 3.
         """
@@ -662,7 +662,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ1Q3c(self):
+    def test_circle_sector_q1_q3c(self):
         """
         Test a pie slice that start in quadrant 1 and ends in quadrant 3.
         """
@@ -686,7 +686,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ2Q4a(self):
+    def test_circle_sector_q2_q4a(self):
         """
         Test a pie slice that start in quadrant 2 and ends in quadrant 4.
         """
@@ -710,7 +710,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ2Q4b(self):
+    def test_circle_sector_q2_q4b(self):
         """
         Test a pie slice that start in quadrant 2 and ends in quadrant 4.
         """
@@ -734,7 +734,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorQ2Q4c(self):
+    def test_circle_sector_q2_q4c(self):
         """
         Test a pie slice that start in quadrant 2 and ends in quadrant 4.
         """
@@ -758,7 +758,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorNegative(self):
+    def test_circle_sector_negative(self):
         """
         Test a pie slice with a negative angle.
         """
@@ -782,7 +782,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorPositive(self):
+    def test_circle_sector_positive(self):
         """
         Test a pie slice with a positive angle.
         """
@@ -806,7 +806,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorMissingSliceQ1a(self):
+    def test_circle_sector_missing_slice_q1a(self):
         """
         Test a pie slice with a positive angle.
         """
@@ -830,7 +830,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorMissingSliceQ1b(self):
+    def test_circle_sector_missing_slice_q1b(self):
         """
         Test a pie slice with a positive angle.
         """
@@ -854,7 +854,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorMissingSliceQ2(self):
+    def test_circle_sector_missing_slice_q2(self):
         """
         Test a pie slice with a positive angle.
         """
@@ -878,7 +878,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorMissingSliceQ3(self):
+    def test_circle_sector_missing_slice_q3(self):
         """
         Test a pie slice with a positive angle.
         """
@@ -902,7 +902,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorMissingSliceQ4a(self):
+    def test_circle_sector_missing_slice_q4a(self):
         """
         Test a pie slice with a positive angle.
         """
@@ -926,7 +926,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleSectorMissingSliceQ4b(self):
+    def test_circle_sector_missing_slice_q4b(self):
         """
         Test a pie slice with a positive angle.
         """
@@ -950,7 +950,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricCircleSector(self):
+    def test_imperial_metric_circle_sector(self):
         path_actual, path_expected = self.paths()
 
         scad = Scad(context=Context())
@@ -980,7 +980,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialCircleSector(self):
+    def test_imperial_imperial_circle_sector(self):
         path_actual, path_expected = self.paths()
 
         scad = Scad(context=Context(unit_length_final=Unit.INCH))

@@ -1,4 +1,5 @@
 import math
+from typing import List
 
 from super_scad.boolean.Difference import Difference
 from super_scad.boolean.Empty import Empty
@@ -28,6 +29,7 @@ class CircleSector(ScadWidget):
                  radius: float | None = None,
                  inner_radius: float | None = None,
                  outer_radius: float | None = None,
+                 extend_legs_by_eps: bool | None = None,
                  rotation: float | None = None,
                  position: Vector2 | None = None,
                  fa: float | None = None,
@@ -43,6 +45,8 @@ class CircleSector(ScadWidget):
         :param radius: The radius of the circle sector (implies inner radius is 0.0).
         :param inner_radius: The inner radius of the circle sector.
         :param outer_radius: The outer radius of the circle sector.
+        :param extend_legs_by_eps: Whether to extend the "legs", i.e., the straight sides of the circle sector, by eps
+                                   for a clear overlap.
         :param rotation: The angle of rotation.
         :param position: The position of the circle sector.
         :param fa: The minimum angle (in degrees) of each fragment.
@@ -118,6 +122,14 @@ class CircleSector(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
+    def extend_legs_by_eps(self) -> bool:
+        """
+        Returns whether to extend the "legs", i.e., the straight sides of the circle sector, by eps for a clear overlap.
+        """
+        return self._args.get('extend_legs_by_eps', False)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
     def rotation(self) -> float:
         """
         Returns the angle of rotation.
@@ -180,8 +192,6 @@ class CircleSector(ScadWidget):
         :param context: The build context.
         """
         angle = self.angle
-        start_angle = self.start_angle
-        end_angle = self.end_angle
 
         if round(self.outer_radius, context.length_digits) <= 0.0 or round(angle, context.angle_digits) == 0.0:
             return Empty()
@@ -203,58 +213,26 @@ class CircleSector(ScadWidget):
         if round(angle - 360.0, context.angle_digits) == 0.0:
             return circles
 
-        if round(angle - 90.0, context.angle_digits) < 0.0:
-            size2 = (self.outer_radius + context.eps) / math.cos(math.radians(Angle.normalize(angle, 90.0) / 2.0))
-            points = [Vector2(0.0, 0.0),
-                      Vector2.from_polar_coordinates(size2, start_angle),
-                      Vector2.from_polar_coordinates(size2, end_angle)]
-
-        elif round(angle - 90.0, context.angle_digits) == 0.0:
-            size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
-            size2 = self.outer_radius + context.eps
-            points = [Vector2(0.0, 0.0),
-                      Vector2.from_polar_coordinates(size2, start_angle),
-                      Vector2.from_polar_coordinates(size1, start_angle + 45.0),
-                      Vector2.from_polar_coordinates(size2, end_angle)]
+        if round(angle - 90.0, context.angle_digits) == 0.0:
+            points = self._polygon_is_q1(context)
 
         elif round(angle - 180.0, context.angle_digits) == 0.0:
-            size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
-            size2 = self.outer_radius + context.eps
-            points = [Vector2.from_polar_coordinates(size2, start_angle),
-                      Vector2.from_polar_coordinates(size1, start_angle + 45.0),
-                      Vector2.from_polar_coordinates(size1, start_angle + 135.0),
-                      Vector2.from_polar_coordinates(size2, end_angle)]
+            points = self._polygon_is_q2(context)
 
         elif round(angle - 270.0, context.angle_digits) == 0.0:
-            size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
-            size2 = self.outer_radius + context.eps
-            points = [Vector2(0.0, 0.0),
-                      Vector2.from_polar_coordinates(size2, start_angle),
-                      Vector2.from_polar_coordinates(size1, start_angle + 45.0),
-                      Vector2.from_polar_coordinates(size1, start_angle + 135.0),
-                      Vector2.from_polar_coordinates(size1, start_angle + 225.0),
-                      Vector2.from_polar_coordinates(size2, end_angle)]
+            points = self._polygon_is_q3(context)
+
+        elif round(angle - 90.0, context.angle_digits) < 0.0:
+            points = self._polygon_in_q1(context)
 
         elif round(angle - 180.0, context.angle_digits) < 0.0:
-            phi = Angle.normalize((start_angle - end_angle) / 2.0, 90.0)
-            size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
-            size2 = size1 / (math.cos(math.radians(phi)) + math.sin(math.radians(phi)))
-            points = [Vector2(0.0, 0.0),
-                      Vector2.from_polar_coordinates(size2, start_angle),
-                      Vector2.from_polar_coordinates(size1, start_angle - phi + 90.0),
-                      Vector2.from_polar_coordinates(size1, start_angle - phi + 180.0),
-                      Vector2.from_polar_coordinates(size2, end_angle)]
+            points = self._polygon_in_q2(context)
+
+        elif round(angle - 270.0, context.angle_digits) < 0.0:
+            points = self._polygon_in_q3(context)
 
         elif round(angle - 360.0, context.angle_digits) < 0.0:
-            phi = Angle.normalize((start_angle - end_angle) / 2.0, 90.0)
-            size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
-            size2 = size1 / (math.cos(math.radians(phi)) + math.sin(math.radians(phi)))
-            points = [Vector2(0.0, 0.0),
-                      Vector2.from_polar_coordinates(size2, start_angle),
-                      Vector2.from_polar_coordinates(size1, start_angle - phi + 90.0),
-                      Vector2.from_polar_coordinates(size1, start_angle - phi + 180.0),
-                      Vector2.from_polar_coordinates(size1, start_angle - phi + 270.0),
-                      Vector2.from_polar_coordinates(size2, end_angle)]
+            points = self._polygon_in_q4(context)
 
         else:
             raise ValueError('Math is broken!')
@@ -268,5 +246,220 @@ class CircleSector(ScadWidget):
             circle_sector = Translate2D(vector=self.position, child=circle_sector)
 
         return circle_sector
+
+    # ----------------------------------------------------------------------------------------------------------------------
+    def _polygon_in_q1(self, context: Context) -> List[Vector2]:
+        """
+        Returns a masking polygon in one quadrant.
+
+        :param context: The build context.
+        """
+        phi = Angle.normalize(self.angle / 2.0, 90.0)
+        start_angle = self.start_angle
+        end_angle = self.end_angle
+
+        size2 = (self.outer_radius + context.eps) / math.cos(math.radians(phi))
+        leg1 = Vector2.from_polar_coordinates(size2, start_angle)
+        leg2 = Vector2.from_polar_coordinates(size2, end_angle)
+
+        if not self.extend_legs_by_eps:
+            return [Vector2(0.0, 0.0), leg1, leg2]
+
+        eps0 = Vector2.from_polar_coordinates(context.eps, start_angle + phi - 180.0)
+        eps1 = Vector2.from_polar_coordinates(context.eps, start_angle - 90.0)
+        eps2 = Vector2.from_polar_coordinates(context.eps, end_angle + 90.0)
+
+        return [eps0,
+                eps1,
+                leg1 + eps1,
+                leg1,
+                leg2,
+                leg2 + eps2,
+                eps2]
+
+    # ----------------------------------------------------------------------------------------------------------------------
+    def _polygon_in_q2(self, context: Context) -> List[Vector2]:
+        """
+        Returns a masking polygon in two quadrants.
+
+        :param context: The build context.
+        """
+        start_angle = self.start_angle
+        end_angle = self.end_angle
+        alpha = Angle.normalize((end_angle - start_angle) / 2.0, 180.0)
+        phi = Angle.normalize((start_angle - end_angle) / 2.0, 90.0)
+
+        size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
+        size2 = size1 / (math.cos(math.radians(phi)) + math.sin(math.radians(phi)))
+        leg1 = Vector2.from_polar_coordinates(size2, start_angle)
+        leg2 = Vector2.from_polar_coordinates(size2, end_angle)
+
+        if not self.extend_legs_by_eps:
+            return [Vector2.origin,
+                    leg1,
+                    Vector2.from_polar_coordinates(size1, start_angle - phi + 90.0),
+                    Vector2.from_polar_coordinates(size1, start_angle - phi + 180.0),
+                    leg2]
+
+        eps0 = Vector2.from_polar_coordinates(context.eps, start_angle + alpha - 180.0)
+        eps1 = Vector2.from_polar_coordinates(context.eps, start_angle - 90.0)
+        eps2 = Vector2.from_polar_coordinates(context.eps, end_angle + 90.0)
+
+        return [eps0,
+                eps1,
+                leg1 + eps1,
+                Vector2.from_polar_coordinates(size1, start_angle - phi + 90.0),
+                Vector2.from_polar_coordinates(size1, start_angle - phi + 180.0),
+                leg2,
+                leg2 + eps2,
+                eps2]
+
+    # ----------------------------------------------------------------------------------------------------------------------
+    def _polygon_in_q3(self, context: Context) -> List[Vector2]:
+        """
+        Returns a masking polygon in three quadrants.
+
+        :param context: The build context.
+        """
+        start_angle = self.start_angle
+        end_angle = self.end_angle
+        phi = Angle.normalize((start_angle - end_angle) / 2.0, 90.0)
+
+        size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
+        size2 = size1 / (math.cos(math.radians(phi)) + math.sin(math.radians(phi)))
+        leg1 = Vector2.from_polar_coordinates(size2, start_angle)
+        leg2 = Vector2.from_polar_coordinates(size2, end_angle)
+
+        if not self.extend_legs_by_eps:
+            return [Vector2.origin,
+                    leg1,
+                    Vector2.from_polar_coordinates(size1, start_angle - phi + 90.0),
+                    Vector2.from_polar_coordinates(size1, start_angle - phi + 180.0),
+                    Vector2.from_polar_coordinates(size1, start_angle - phi + 270.0),
+                    leg2]
+
+        eps0 = Vector2.from_polar_coordinates(context.eps / math.sin(math.radians(phi)), start_angle - phi)
+        eps1 = Vector2.from_polar_coordinates(context.eps, start_angle - 90.0)
+        eps2 = Vector2.from_polar_coordinates(context.eps, end_angle + 90.0)
+
+        return [eps0,
+                leg1 + eps1,
+                leg1,
+                Vector2.from_polar_coordinates(size1, start_angle - phi + 90.0),
+                Vector2.from_polar_coordinates(size1, start_angle - phi + 180.0),
+                Vector2.from_polar_coordinates(size1, start_angle - phi + 270.0),
+                leg2,
+                leg2 + eps2]
+
+    # ----------------------------------------------------------------------------------------------------------------------
+    def _polygon_in_q4(self, context: Context) -> List[Vector2]:
+        """
+        Returns a masking polygon in four quadrants.
+
+        :param context: The build context.
+        """
+        return self._polygon_in_q3(context)
+
+    # ----------------------------------------------------------------------------------------------------------------------
+    def _polygon_is_q1(self, context: Context) -> List[Vector2]:
+        """
+        Returns a masking polygon that is exactly one quadrant.
+
+        :param context: The build context.
+        """
+        start_angle = self.start_angle
+        end_angle = self.end_angle
+
+        size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
+        size2 = self.outer_radius + context.eps
+        leg1 = Vector2.from_polar_coordinates(size2, start_angle)
+        leg2 = Vector2.from_polar_coordinates(size2, end_angle)
+
+        if not self.extend_legs_by_eps:
+            return [Vector2.origin,
+                    leg1,
+                    Vector2.from_polar_coordinates(size1, start_angle + 45.0),
+                    leg2]
+
+        eps0 = Vector2.from_polar_coordinates(context.eps, start_angle - 135.0)
+        eps1 = Vector2.from_polar_coordinates(context.eps, start_angle - 90.0)
+        eps2 = Vector2.from_polar_coordinates(context.eps, end_angle + 90.0)
+
+        return [eps0,
+                eps1,
+                leg1 + eps1,
+                leg1,
+                Vector2.from_polar_coordinates(size1, start_angle + 45.0),
+                leg2,
+                leg2 + eps2,
+                eps2]
+
+    # ----------------------------------------------------------------------------------------------------------------------
+    def _polygon_is_q2(self, context: Context):
+        """
+        Returns a masking polygon that is exactly two quadrants.
+
+        :param context: The build context.
+        """
+        start_angle = self.start_angle
+        end_angle = self.end_angle
+
+        size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
+        size2 = self.outer_radius + context.eps
+        leg1 = Vector2.from_polar_coordinates(size2, start_angle)
+        leg2 = Vector2.from_polar_coordinates(size2, end_angle)
+
+        if not self.extend_legs_by_eps:
+            return [leg1,
+                    Vector2.from_polar_coordinates(size1, start_angle + 45.0),
+                    Vector2.from_polar_coordinates(size1, start_angle + 135.0),
+                    leg2]
+
+        eps1 = Vector2.from_polar_coordinates(context.eps, start_angle - 90.0)
+        eps2 = Vector2.from_polar_coordinates(context.eps, end_angle + 90.0)
+
+        return [leg1 + eps1,
+                leg1,
+                Vector2.from_polar_coordinates(size1, start_angle + 45.0),
+                Vector2.from_polar_coordinates(size1, start_angle + 135.0),
+                leg2,
+                leg2 + eps2]
+
+    # ----------------------------------------------------------------------------------------------------------------------
+    def _polygon_is_q3(self, context: Context):
+        """
+        Returns a masking polygon that is exactly three quadrants.
+
+        :param context: The build context.
+        """
+        start_angle = self.start_angle
+        end_angle = self.end_angle
+
+        size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
+        size2 = self.outer_radius + context.eps
+        leg1 = Vector2.from_polar_coordinates(size2, start_angle)
+        leg2 = Vector2.from_polar_coordinates(size2, end_angle)
+
+        if not self.extend_legs_by_eps:
+            return [Vector2.origin,
+                    leg1,
+                    Vector2.from_polar_coordinates(size1, start_angle + 45.0),
+                    Vector2.from_polar_coordinates(size1, start_angle + 135.0),
+                    Vector2.from_polar_coordinates(size1, start_angle + 225.0),
+                    leg2]
+
+        eps0 = Vector2.from_polar_coordinates(context.eps, start_angle - 45.0)
+        eps1 = Vector2.from_polar_coordinates(context.eps, start_angle - 90.0)
+        eps2 = Vector2.from_polar_coordinates(context.eps, end_angle + 90.0)
+
+        return [eps0,
+                eps1,
+                leg1 + eps1,
+                Vector2.from_polar_coordinates(size1, start_angle + 45.0),
+                Vector2.from_polar_coordinates(size1, start_angle + 135.0),
+                Vector2.from_polar_coordinates(size1, start_angle + 225.0),
+                leg2,
+                leg2 + eps2,
+                eps2]
 
 # ----------------------------------------------------------------------------------------------------------------------

@@ -1,3 +1,4 @@
+from super_scad.boolean.Difference import Difference
 from super_scad.scad.Context import Context
 from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
@@ -15,7 +16,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector4n(self):
         """
-        Test a pie slice based on a circle with a multiple of 4 vertices.
+        Test a circle sector based on a circle with a multiple of 4 vertices.
         """
         path_actual, path_expected = self.paths()
 
@@ -38,9 +39,109 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_circle_sector_q1(self):
+    def test_circle_sector_070_extend_legs_by_eps(self):
         """
-        Test a pie slice that start lies quadrant 1.
+        Test a circle sector that is 70 degrees and with legs extended by eps.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(context=Context(fn=360, eps=0.1))
+
+        circle_sector1 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0)
+        circle_sector2 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0, extend_legs_by_eps=True)
+
+        scad.run_super_scad(Difference(children=[circle_sector2, circle_sector1]), path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_circle_sector_090_extend_legs_by_eps(self):
+        """
+        Test a circle sector that is 90 degrees and with legs extended by eps.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(context=Context(fn=360, eps=0.1))
+        circle_sector1 = CircleSector(start_angle=10.0, end_angle=100.0, radius=10.0)
+        circle_sector2 = CircleSector(start_angle=10.0, end_angle=100.0, radius=10.0, extend_legs_by_eps=True)
+
+        scad.run_super_scad(Difference(children=[circle_sector2, circle_sector1]), path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_circle_sector_160_extend_legs_by_eps(self):
+        """
+        Test a circle sector that is 160 degrees and with legs extended by eps.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(context=Context(fn=360, eps=0.1))
+
+        circle_sector1 = CircleSector(start_angle=10.0, end_angle=170.0, radius=10.0)
+        circle_sector2 = CircleSector(start_angle=10.0, end_angle=170.0, radius=10.0, extend_legs_by_eps=True)
+
+        scad.run_super_scad(Difference(children=[circle_sector2, circle_sector1]), path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_circle_sector_180_extend_legs_by_eps(self):
+        """
+        Test a circle sector that is 180 degrees and with legs extended by eps.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(context=Context(fn=360, eps=0.1))
+        circle_sector1 = CircleSector(start_angle=10.0, end_angle=190.0, radius=10.0)
+        circle_sector2 = CircleSector(start_angle=10.0, end_angle=190.0, radius=10.0, extend_legs_by_eps=True)
+
+        scad.run_super_scad(Difference(children=[circle_sector2, circle_sector1]), path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_circle_sector_250_extend_legs_by_eps(self):
+        """
+        Test a circle sector that is 250 degrees and with legs extended by eps.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(context=Context(fn=360, eps=0.1))
+
+        circle_sector1 = CircleSector(start_angle=10.0, end_angle=260.0, radius=10.0)
+        circle_sector2 = CircleSector(start_angle=10.0, end_angle=260.0, radius=10.0, extend_legs_by_eps=True)
+
+        scad.run_super_scad(Difference(children=[circle_sector2, circle_sector1]), path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_circle_sector_340_extend_legs_by_eps(self):
+        """
+        Test a circle sector that is 340 degrees and with legs extended by eps.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(context=Context(fn=360, eps=0.1))
+
+        circle_sector1 = CircleSector(start_angle=5.0, end_angle=350.0, radius=10.0)
+        circle_sector2 = CircleSector(start_angle=5.0, end_angle=350.0, radius=10.0, extend_legs_by_eps=True)
+
+        scad.run_super_scad(Difference(children=[circle_sector2, circle_sector1]), path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_circle_sector_in_q1(self):
+        """
+        Test a circle sector that start lies quadrant 1.
         """
         path_actual, path_expected = self.paths()
 
@@ -64,7 +165,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q2(self):
         """
-        Test a pie slice that start lies quadrant 2.
+        Test a circle sector that start lies quadrant 2.
         """
         path_actual, path_expected = self.paths()
 
@@ -88,7 +189,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q3(self):
         """
-        Test a pie slice that start lies quadrant 3.
+        Test a circle sector that start lies quadrant 3.
         """
         path_actual, path_expected = self.paths()
 
@@ -112,7 +213,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q4(self):
         """
-        Test a pie slice that start lies quadrant 4.
+        Test a circle sector that start lies quadrant 4.
         """
         path_actual, path_expected = self.paths()
 
@@ -136,7 +237,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_is_q1(self):
         """
-        Test a pie slice that is quadrant 1.
+        Test a circle sector that is quadrant 1.
         """
         path_actual, path_expected = self.paths()
 
@@ -160,7 +261,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_is_q2(self):
         """
-        Test a pie slice that is quadrant 2.
+        Test a circle sector that is quadrant 2.
         """
         path_actual, path_expected = self.paths()
 
@@ -184,7 +285,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_is_q3(self):
         """
-        Test a pie slice that is quadrant 3.
+        Test a circle sector that is quadrant 3.
         """
         path_actual, path_expected = self.paths()
 
@@ -208,7 +309,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_is_q4(self):
         """
-        Test a pie slice that is quadrant 4.
+        Test a circle sector that is quadrant 4.
         """
         path_actual, path_expected = self.paths()
 
@@ -232,7 +333,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_is_q1_q2(self):
         """
-        Test a pie slice that is quadrant 1 & 2.
+        Test a circle sector that is quadrant 1 & 2.
         """
         path_actual, path_expected = self.paths()
 
@@ -256,7 +357,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_is_q2_q3(self):
         """
-        Test a pie slice that is quadrant 2 & 3.
+        Test a circle sector that is quadrant 2 & 3.
         """
         path_actual, path_expected = self.paths()
 
@@ -280,7 +381,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_is_q3_q4(self):
         """
-        Test a pie slice that is quadrant 3 & 4.
+        Test a circle sector that is quadrant 3 & 4.
         """
         path_actual, path_expected = self.paths()
 
@@ -304,7 +405,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_is_q4_q1(self):
         """
-        Test a pie slice that is quadrant 3 & 4.
+        Test a circle sector that is quadrant 3 & 4.
         """
         path_actual, path_expected = self.paths()
 
@@ -328,7 +429,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_is_q1_q2_q3(self):
         """
-        Test a pie slice that is quadrant 1, 2, & 3.
+        Test a circle sector that is quadrant 1, 2, & 3.
         """
         path_actual, path_expected = self.paths()
 
@@ -352,7 +453,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_is_q2_q3_q4(self):
         """
-        Test a pie slice that is quadrant 2, 3 & 4.
+        Test a circle sector that is quadrant 2, 3 & 4.
         """
         path_actual, path_expected = self.paths()
 
@@ -376,7 +477,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_is_q3_q4_q1(self):
         """
-        Test a pie slice that is quadrant 3, 4 & 1.
+        Test a circle sector that is quadrant 3, 4 & 1.
         """
         path_actual, path_expected = self.paths()
 
@@ -400,7 +501,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_is_q4_q1_q2(self):
         """
-        Test a pie slice that is quadrant 4, 1 & 2.
+        Test a circle sector that is quadrant 4, 1 & 2.
         """
         path_actual, path_expected = self.paths()
 
@@ -424,7 +525,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_is_q1_q2_q3_q4(self):
         """
-        Test a pie slice that is quadrant 1, 2, 3, & 4.
+        Test a circle sector that is quadrant 1, 2, 3, & 4.
         """
         path_actual, path_expected = self.paths()
 
@@ -448,7 +549,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q1_q2(self):
         """
-        Test a pie slice that start in quadrant 1 and ends in quadrant 2.
+        Test a circle sector that starts in quadrant 1 and ends in quadrant 2.
         """
         path_actual, path_expected = self.paths()
 
@@ -472,7 +573,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q2_q3(self):
         """
-        Test a pie slice that start in quadrant 2 and ends in quadrant 3.
+        Test a circle sector that starts in quadrant 2 and ends in quadrant 3.
         """
         path_actual, path_expected = self.paths()
 
@@ -496,7 +597,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q3_q4(self):
         """
-        Test a pie slice that start in quadrant 3 and ends in quadrant 4.
+        Test a circle sector that starts in quadrant 3 and ends in quadrant 4.
         """
         path_actual, path_expected = self.paths()
 
@@ -520,7 +621,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q3_q1b(self):
         """
-        Test a pie slice that start in quadrant 3 and ends in quadrant 1.
+        Test a circle sector that starts in quadrant 3 and ends in quadrant 1.
         """
         path_actual, path_expected = self.paths()
 
@@ -544,7 +645,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q3_q1c(self):
         """
-        Test a pie slice that start in quadrant 3 and ends in quadrant 1.
+        Test a circle sector that starts in quadrant 3 and ends in quadrant 1.
         """
         path_actual, path_expected = self.paths()
 
@@ -568,7 +669,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q4_q1a(self):
         """
-        Test a pie slice that start in quadrant 4 and ends in quadrant 1.
+        Test a circle sector that starts in quadrant 4 and ends in quadrant 1.
         """
         path_actual, path_expected = self.paths()
 
@@ -592,7 +693,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q4_q1b(self):
         """
-        Test a pie slice that start in quadrant 4 and ends in quadrant 1.
+        Test a circle sector that starts in quadrant 4 and ends in quadrant 1.
         """
         path_actual, path_expected = self.paths()
 
@@ -616,7 +717,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q1_q3a(self):
         """
-        Test a pie slice that start in quadrant 1 and ends in quadrant 3.
+        Test a circle sector that starts in quadrant 1 and ends in quadrant 3.
         """
         path_actual, path_expected = self.paths()
 
@@ -640,7 +741,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q1_q3b(self):
         """
-        Test a pie slice that start in quadrant 1 and ends in quadrant 3.
+        Test a circle sector that starts in quadrant 1 and ends in quadrant 3.
         """
         path_actual, path_expected = self.paths()
 
@@ -664,7 +765,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q1_q3c(self):
         """
-        Test a pie slice that start in quadrant 1 and ends in quadrant 3.
+        Test a circle sector that starts in quadrant 1 and ends in quadrant 3.
         """
         path_actual, path_expected = self.paths()
 
@@ -688,7 +789,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q2_q4a(self):
         """
-        Test a pie slice that start in quadrant 2 and ends in quadrant 4.
+        Test a circle sector that starts in quadrant 2 and ends in quadrant 4.
         """
         path_actual, path_expected = self.paths()
 
@@ -712,7 +813,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q2_q4b(self):
         """
-        Test a pie slice that start in quadrant 2 and ends in quadrant 4.
+        Test a circle sector that starts in quadrant 2 and ends in quadrant 4.
         """
         path_actual, path_expected = self.paths()
 
@@ -736,7 +837,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_q2_q4c(self):
         """
-        Test a pie slice that start in quadrant 2 and ends in quadrant 4.
+        Test a circle sector that starts in quadrant 2 and ends in quadrant 4.
         """
         path_actual, path_expected = self.paths()
 
@@ -760,7 +861,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_negative(self):
         """
-        Test a pie slice with a negative angle.
+        Test a circle sector with a negative angle.
         """
         path_actual, path_expected = self.paths()
 
@@ -784,7 +885,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_positive(self):
         """
-        Test a pie slice with a positive angle.
+        Test a circle sector with a positive angle.
         """
         path_actual, path_expected = self.paths()
 
@@ -808,7 +909,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_missing_slice_q1a(self):
         """
-        Test a pie slice with a positive angle.
+        Test a circle sector with a positive angle.
         """
         path_actual, path_expected = self.paths()
 
@@ -832,7 +933,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_missing_slice_q1b(self):
         """
-        Test a pie slice with a positive angle.
+        Test a circle sector with a positive angle.
         """
         path_actual, path_expected = self.paths()
 
@@ -856,7 +957,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_missing_slice_q2(self):
         """
-        Test a pie slice with a positive angle.
+        Test a circle sector with a positive angle.
         """
         path_actual, path_expected = self.paths()
 
@@ -880,7 +981,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_missing_slice_q3(self):
         """
-        Test a pie slice with a positive angle.
+        Test a circle sector with a positive angle.
         """
         path_actual, path_expected = self.paths()
 
@@ -904,7 +1005,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_missing_slice_q4a(self):
         """
-        Test a pie slice with a positive angle.
+        Test a circle sector with a positive angle.
         """
         path_actual, path_expected = self.paths()
 
@@ -928,7 +1029,7 @@ class CircleSectorTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_missing_slice_q4b(self):
         """
-        Test a pie slice with a positive angle.
+        Test a circle sector with a positive angle.
         """
         path_actual, path_expected = self.paths()
 
@@ -983,7 +1084,6 @@ class CircleSectorTest(ScadTestCase):
     def test_imperial_imperial_circle_sector(self):
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context(unit_length_final=Unit.INCH))
         scad = Scad(context=Context(unit_length_final=Unit.INCH))
         circle_sector = ImperialCircleSector(start_angle=15.0,
                                              end_angle=-15.0,

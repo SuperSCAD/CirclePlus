@@ -30,8 +30,6 @@ class CircleSector(ScadWidget):
                  inner_radius: float | None = None,
                  outer_radius: float | None = None,
                  extend_legs_by_eps: bool | None = None,
-                 rotation: float | None = None,
-                 position: Vector2 | None = None,
                  fa: float | None = None,
                  fs: float | None = None,
                  fn: int | None = None,
@@ -47,8 +45,6 @@ class CircleSector(ScadWidget):
         :param outer_radius: The outer radius of the circle sector.
         :param extend_legs_by_eps: Whether to extend the "legs", i.e., the straight sides of the circle sector, by eps
                                    for a clear overlap.
-        :param rotation: The angle of rotation.
-        :param position: The position of the circle sector.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
@@ -127,22 +123,6 @@ class CircleSector(ScadWidget):
         Returns whether to extend the "legs", i.e., the straight sides of the circle sector, by eps for a clear overlap.
         """
         return self._args.get('extend_legs_by_eps', False)
-
-    # ------------------------------------------------------------------------------------------------------------------
-    @property
-    def rotation(self) -> float:
-        """
-        Returns the angle of rotation.
-        """
-        return self._args.get('rotation', 0.0)
-
-    # ------------------------------------------------------------------------------------------------------------------
-    @property
-    def position(self) -> Vector2:
-        """
-        Returns position this circle sector.
-        """
-        return self.uc(self._args.get('position', Vector2.origin))
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -238,12 +218,6 @@ class CircleSector(ScadWidget):
             raise ValueError('Math is broken!')
 
         circle_sector = Intersection(children=[circles, Polygon(points=points, convexity=self.convexity)])
-
-        if self.rotation != 0.0:
-            circle_sector = Rotate2D(angle=self.rotation, child=circle_sector)
-
-        if self.position.is_not_origin:
-            circle_sector = Translate2D(vector=self.position, child=circle_sector)
 
         return circle_sector
 

@@ -9,8 +9,6 @@ from super_scad.d2.Polygon import Polygon
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
-from super_scad.transformation.Rotate2D import Rotate2D
-from super_scad.transformation.Translate2D import Translate2D
 from super_scad.type.Angle import Angle
 from super_scad.type.Vector2 import Vector2
 

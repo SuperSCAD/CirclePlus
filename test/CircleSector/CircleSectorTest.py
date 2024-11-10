@@ -1,7 +1,10 @@
 from super_scad.boolean.Difference import Difference
+from super_scad.boolean.Union import Union
 from super_scad.scad.Context import Context
 from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
+from super_scad.transformation.Paint import Paint
+from super_scad.type.Color import Color
 
 from super_scad_circle_sector.CircleSector import CircleSector
 from test.CircleSector.ImperialCircleSector import ImperialCircleSector
@@ -45,12 +48,15 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context(fn=360, eps=0.1))
+        scad = Scad(context=Context(fn=360, eps=.1))
 
         circle_sector1 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0)
         circle_sector2 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0, extend_legs_by_eps=True)
 
-        scad.run_super_scad(Difference(children=[circle_sector2, circle_sector1]), path_actual)
+        diff = Difference(children=[Paint(color=Color('red'),
+                                          child=circle_sector2),
+                                    circle_sector1])
+        scad.run_super_scad(diff, path_actual)
         actual = path_actual.read_text()
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
@@ -66,7 +72,10 @@ class CircleSectorTest(ScadTestCase):
         circle_sector1 = CircleSector(start_angle=10.0, end_angle=100.0, radius=10.0)
         circle_sector2 = CircleSector(start_angle=10.0, end_angle=100.0, radius=10.0, extend_legs_by_eps=True)
 
-        scad.run_super_scad(Difference(children=[circle_sector2, circle_sector1]), path_actual)
+        diff = Difference(children=[Paint(color=Color('red'),
+                                          child=circle_sector2),
+                                    circle_sector1])
+        scad.run_super_scad(diff, path_actual)
         actual = path_actual.read_text()
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
@@ -83,7 +92,10 @@ class CircleSectorTest(ScadTestCase):
         circle_sector1 = CircleSector(start_angle=10.0, end_angle=170.0, radius=10.0)
         circle_sector2 = CircleSector(start_angle=10.0, end_angle=170.0, radius=10.0, extend_legs_by_eps=True)
 
-        scad.run_super_scad(Difference(children=[circle_sector2, circle_sector1]), path_actual)
+        diff = Difference(children=[Paint(color=Color('red'),
+                                          child=circle_sector2),
+                                    circle_sector1])
+        scad.run_super_scad(diff, path_actual)
         actual = path_actual.read_text()
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
@@ -99,7 +111,10 @@ class CircleSectorTest(ScadTestCase):
         circle_sector1 = CircleSector(start_angle=10.0, end_angle=190.0, radius=10.0)
         circle_sector2 = CircleSector(start_angle=10.0, end_angle=190.0, radius=10.0, extend_legs_by_eps=True)
 
-        scad.run_super_scad(Difference(children=[circle_sector2, circle_sector1]), path_actual)
+        diff = Difference(children=[Paint(color=Color('red'),
+                                          child=circle_sector2),
+                                    circle_sector1])
+        scad.run_super_scad(diff, path_actual)
         actual = path_actual.read_text()
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
@@ -116,7 +131,10 @@ class CircleSectorTest(ScadTestCase):
         circle_sector1 = CircleSector(start_angle=10.0, end_angle=260.0, radius=10.0)
         circle_sector2 = CircleSector(start_angle=10.0, end_angle=260.0, radius=10.0, extend_legs_by_eps=True)
 
-        scad.run_super_scad(Difference(children=[circle_sector2, circle_sector1]), path_actual)
+        diff = Difference(children=[Paint(color=Color('red'),
+                                          child=circle_sector2),
+                                    circle_sector1])
+        scad.run_super_scad(diff, path_actual)
         actual = path_actual.read_text()
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
@@ -133,7 +151,10 @@ class CircleSectorTest(ScadTestCase):
         circle_sector1 = CircleSector(start_angle=5.0, end_angle=350.0, radius=10.0)
         circle_sector2 = CircleSector(start_angle=5.0, end_angle=350.0, radius=10.0, extend_legs_by_eps=True)
 
-        scad.run_super_scad(Difference(children=[circle_sector2, circle_sector1]), path_actual)
+        diff = Difference(children=[Paint(color=Color('red'),
+                                          child=circle_sector2),
+                                    circle_sector1])
+        scad.run_super_scad(diff, path_actual)
         actual = path_actual.read_text()
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)

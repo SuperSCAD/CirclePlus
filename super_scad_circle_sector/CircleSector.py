@@ -211,13 +211,18 @@ class CircleSector(ScadWidget):
 
         elif round(angle - 360.0, context.angle_digits) < 0.0:
             points = self._polygon_in_q4(context)
-
         else:
             raise ValueError('Math is broken!')
 
-        circle_sector = Intersection(children=[circles, Polygon(points=points, convexity=self.convexity)])
+        if self.extend_legs_by_eps:
+            extend_sides_by_eps = {0, len(points) - 1}
+        else:
+            extend_sides_by_eps = None
 
-        return circle_sector
+        return Intersection(children=[circles,
+                                      Polygon(points=points,
+                                              convexity=self.convexity,
+                                              extend_sides_by_eps=extend_sides_by_eps)])
 
     # ----------------------------------------------------------------------------------------------------------------------
     def _polygon_in_q1(self, context: Context) -> List[Vector2]:
@@ -231,23 +236,10 @@ class CircleSector(ScadWidget):
         end_angle = self.end_angle
 
         size2 = (self.outer_radius + context.eps) / math.cos(math.radians(phi))
-        leg1 = Vector2.from_polar_coordinates(size2, start_angle)
-        leg2 = Vector2.from_polar_coordinates(size2, end_angle)
 
-        if not self.extend_legs_by_eps:
-            return [Vector2(0.0, 0.0), leg1, leg2]
-
-        eps0 = Vector2.from_polar_coordinates(context.eps, start_angle + phi - 180.0)
-        eps1 = Vector2.from_polar_coordinates(context.eps, start_angle - 90.0)
-        eps2 = Vector2.from_polar_coordinates(context.eps, end_angle + 90.0)
-
-        return [eps0,
-                eps1,
-                leg1 + eps1,
-                leg1,
-                leg2,
-                leg2 + eps2,
-                eps2]
+        return [Vector2(0.0, 0.0),
+                Vector2.from_polar_coordinates(size2, start_angle),
+                Vector2.from_polar_coordinates(size2, end_angle)]
 
     # ----------------------------------------------------------------------------------------------------------------------
     def _polygon_in_q2(self, context: Context) -> List[Vector2]:
@@ -258,33 +250,16 @@ class CircleSector(ScadWidget):
         """
         start_angle = self.start_angle
         end_angle = self.end_angle
-        alpha = Angle.normalize((end_angle - start_angle) / 2.0, 180.0)
         phi = Angle.normalize((start_angle - end_angle) / 2.0, 90.0)
 
         size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
         size2 = size1 / (math.cos(math.radians(phi)) + math.sin(math.radians(phi)))
-        leg1 = Vector2.from_polar_coordinates(size2, start_angle)
-        leg2 = Vector2.from_polar_coordinates(size2, end_angle)
 
-        if not self.extend_legs_by_eps:
-            return [Vector2.origin,
-                    leg1,
-                    Vector2.from_polar_coordinates(size1, start_angle - phi + 90.0),
-                    Vector2.from_polar_coordinates(size1, start_angle - phi + 180.0),
-                    leg2]
-
-        eps0 = Vector2.from_polar_coordinates(context.eps, start_angle + alpha - 180.0)
-        eps1 = Vector2.from_polar_coordinates(context.eps, start_angle - 90.0)
-        eps2 = Vector2.from_polar_coordinates(context.eps, end_angle + 90.0)
-
-        return [eps0,
-                eps1,
-                leg1 + eps1,
+        return [Vector2.origin,
+                Vector2.from_polar_coordinates(size2, start_angle),
                 Vector2.from_polar_coordinates(size1, start_angle - phi + 90.0),
                 Vector2.from_polar_coordinates(size1, start_angle - phi + 180.0),
-                leg2,
-                leg2 + eps2,
-                eps2]
+                Vector2.from_polar_coordinates(size2, end_angle)]
 
     # ----------------------------------------------------------------------------------------------------------------------
     def _polygon_in_q3(self, context: Context) -> List[Vector2]:
@@ -299,29 +274,13 @@ class CircleSector(ScadWidget):
 
         size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
         size2 = size1 / (math.cos(math.radians(phi)) + math.sin(math.radians(phi)))
-        leg1 = Vector2.from_polar_coordinates(size2, start_angle)
-        leg2 = Vector2.from_polar_coordinates(size2, end_angle)
 
-        if not self.extend_legs_by_eps:
-            return [Vector2.origin,
-                    leg1,
-                    Vector2.from_polar_coordinates(size1, start_angle - phi + 90.0),
-                    Vector2.from_polar_coordinates(size1, start_angle - phi + 180.0),
-                    Vector2.from_polar_coordinates(size1, start_angle - phi + 270.0),
-                    leg2]
-
-        eps0 = Vector2.from_polar_coordinates(context.eps / math.sin(math.radians(phi)), start_angle - phi)
-        eps1 = Vector2.from_polar_coordinates(context.eps, start_angle - 90.0)
-        eps2 = Vector2.from_polar_coordinates(context.eps, end_angle + 90.0)
-
-        return [eps0,
-                leg1 + eps1,
-                leg1,
+        return [Vector2.origin,
+                Vector2.from_polar_coordinates(size2, start_angle),
                 Vector2.from_polar_coordinates(size1, start_angle - phi + 90.0),
                 Vector2.from_polar_coordinates(size1, start_angle - phi + 180.0),
                 Vector2.from_polar_coordinates(size1, start_angle - phi + 270.0),
-                leg2,
-                leg2 + eps2]
+                Vector2.from_polar_coordinates(size2, end_angle)]
 
     # ----------------------------------------------------------------------------------------------------------------------
     def _polygon_in_q4(self, context: Context) -> List[Vector2]:
@@ -344,30 +303,14 @@ class CircleSector(ScadWidget):
 
         size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
         size2 = self.outer_radius + context.eps
-        leg1 = Vector2.from_polar_coordinates(size2, start_angle)
-        leg2 = Vector2.from_polar_coordinates(size2, end_angle)
 
-        if not self.extend_legs_by_eps:
-            return [Vector2.origin,
-                    leg1,
-                    Vector2.from_polar_coordinates(size1, start_angle + 45.0),
-                    leg2]
-
-        eps0 = Vector2.from_polar_coordinates(context.eps, start_angle - 135.0)
-        eps1 = Vector2.from_polar_coordinates(context.eps, start_angle - 90.0)
-        eps2 = Vector2.from_polar_coordinates(context.eps, end_angle + 90.0)
-
-        return [eps0,
-                eps1,
-                leg1 + eps1,
-                leg1,
+        return [Vector2.origin,
+                Vector2.from_polar_coordinates(size2, start_angle),
                 Vector2.from_polar_coordinates(size1, start_angle + 45.0),
-                leg2,
-                leg2 + eps2,
-                eps2]
+                Vector2.from_polar_coordinates(size2, end_angle)]
 
     # ----------------------------------------------------------------------------------------------------------------------
-    def _polygon_is_q2(self, context: Context):
+    def _polygon_is_q2(self, context: Context) -> List[Vector2]:
         """
         Returns a masking polygon that is exactly two quadrants.
 
@@ -378,27 +321,14 @@ class CircleSector(ScadWidget):
 
         size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
         size2 = self.outer_radius + context.eps
-        leg1 = Vector2.from_polar_coordinates(size2, start_angle)
-        leg2 = Vector2.from_polar_coordinates(size2, end_angle)
 
-        if not self.extend_legs_by_eps:
-            return [leg1,
-                    Vector2.from_polar_coordinates(size1, start_angle + 45.0),
-                    Vector2.from_polar_coordinates(size1, start_angle + 135.0),
-                    leg2]
-
-        eps1 = Vector2.from_polar_coordinates(context.eps, start_angle - 90.0)
-        eps2 = Vector2.from_polar_coordinates(context.eps, end_angle + 90.0)
-
-        return [leg1 + eps1,
-                leg1,
+        return [Vector2.from_polar_coordinates(size2, start_angle),
                 Vector2.from_polar_coordinates(size1, start_angle + 45.0),
                 Vector2.from_polar_coordinates(size1, start_angle + 135.0),
-                leg2,
-                leg2 + eps2]
+                Vector2.from_polar_coordinates(size2, end_angle)]
 
     # ----------------------------------------------------------------------------------------------------------------------
-    def _polygon_is_q3(self, context: Context):
+    def _polygon_is_q3(self, context: Context) -> List[Vector2]:
         """
         Returns a masking polygon that is exactly three quadrants.
 
@@ -409,29 +339,12 @@ class CircleSector(ScadWidget):
 
         size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
         size2 = self.outer_radius + context.eps
-        leg1 = Vector2.from_polar_coordinates(size2, start_angle)
-        leg2 = Vector2.from_polar_coordinates(size2, end_angle)
 
-        if not self.extend_legs_by_eps:
-            return [Vector2.origin,
-                    leg1,
-                    Vector2.from_polar_coordinates(size1, start_angle + 45.0),
-                    Vector2.from_polar_coordinates(size1, start_angle + 135.0),
-                    Vector2.from_polar_coordinates(size1, start_angle + 225.0),
-                    leg2]
-
-        eps0 = Vector2.from_polar_coordinates(context.eps, start_angle - 45.0)
-        eps1 = Vector2.from_polar_coordinates(context.eps, start_angle - 90.0)
-        eps2 = Vector2.from_polar_coordinates(context.eps, end_angle + 90.0)
-
-        return [eps0,
-                eps1,
-                leg1 + eps1,
+        return [Vector2.origin,
+                Vector2.from_polar_coordinates(size2, start_angle),
                 Vector2.from_polar_coordinates(size1, start_angle + 45.0),
                 Vector2.from_polar_coordinates(size1, start_angle + 135.0),
                 Vector2.from_polar_coordinates(size1, start_angle + 225.0),
-                leg2,
-                leg2 + eps2,
-                eps2]
+                Vector2.from_polar_coordinates(size2, end_angle)]
 
 # ----------------------------------------------------------------------------------------------------------------------

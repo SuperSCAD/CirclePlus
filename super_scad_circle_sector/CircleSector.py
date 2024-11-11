@@ -192,32 +192,32 @@ class CircleSector(ScadWidget):
             return circles
 
         if round(angle - 90.0, context.angle_digits) == 0.0:
-            points = self._polygon_is_q1(context)
+            points = self._polygon_is_q1()
 
         elif round(angle - 180.0, context.angle_digits) == 0.0:
-            points = self._polygon_is_q2(context)
+            points = self._polygon_is_q2()
 
         elif round(angle - 270.0, context.angle_digits) == 0.0:
-            points = self._polygon_is_q3(context)
+            points = self._polygon_is_q3()
 
         elif round(angle - 90.0, context.angle_digits) < 0.0:
-            points = self._polygon_in_q1(context)
+            points = self._polygon_in_q1()
 
         elif round(angle - 180.0, context.angle_digits) < 0.0:
-            points = self._polygon_in_q2(context)
+            points = self._polygon_in_q2()
 
         elif round(angle - 270.0, context.angle_digits) < 0.0:
-            points = self._polygon_in_q3(context)
+            points = self._polygon_in_q3()
 
         elif round(angle - 360.0, context.angle_digits) < 0.0:
-            points = self._polygon_in_q4(context)
+            points = self._polygon_in_q4()
         else:
             raise ValueError('Math is broken!')
 
-        if self.extend_legs_by_eps:
-            extend_sides_by_eps = {0, len(points) - 1}
-        else:
-            extend_sides_by_eps = None
+        extend_sides_by_eps = {index for index in range(len(points))}
+        if not self.extend_legs_by_eps:
+            extend_sides_by_eps.remove(0)
+            extend_sides_by_eps.remove(len(points) - 1)
 
         return Intersection(children=[circles,
                                       Polygon(points=points,
@@ -225,54 +225,47 @@ class CircleSector(ScadWidget):
                                               extend_sides_by_eps=extend_sides_by_eps)])
 
     # ----------------------------------------------------------------------------------------------------------------------
-    def _polygon_in_q1(self, context: Context) -> List[Vector2]:
+    def _polygon_in_q1(self) -> List[Vector2]:
         """
         Returns a masking polygon in one quadrant.
-
-        :param context: The build context.
         """
         phi = Angle.normalize(self.angle / 2.0, 90.0)
         start_angle = self.start_angle
         end_angle = self.end_angle
 
-        size2 = (self.outer_radius + context.eps) / math.cos(math.radians(phi))
+        size2 = self.outer_radius / math.cos(math.radians(phi))
 
         return [Vector2(0.0, 0.0),
                 Vector2.from_polar_coordinates(size2, start_angle),
                 Vector2.from_polar_coordinates(size2, end_angle)]
 
     # ----------------------------------------------------------------------------------------------------------------------
-    def _polygon_in_q2(self, context: Context) -> List[Vector2]:
+    def _polygon_in_q2(self) -> List[Vector2]:
         """
         Returns a masking polygon in two quadrants.
-
-        :param context: The build context.
         """
         start_angle = self.start_angle
         end_angle = self.end_angle
         phi = Angle.normalize((start_angle - end_angle) / 2.0, 90.0)
 
-        size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
+        size1 = math.sqrt(2.0) * self.outer_radius
         size2 = size1 / (math.cos(math.radians(phi)) + math.sin(math.radians(phi)))
 
         return [Vector2.origin,
                 Vector2.from_polar_coordinates(size2, start_angle),
                 Vector2.from_polar_coordinates(size1, start_angle - phi + 90.0),
-                Vector2.from_polar_coordinates(size1, start_angle - phi + 180.0),
                 Vector2.from_polar_coordinates(size2, end_angle)]
 
     # ----------------------------------------------------------------------------------------------------------------------
-    def _polygon_in_q3(self, context: Context) -> List[Vector2]:
+    def _polygon_in_q3(self) -> List[Vector2]:
         """
         Returns a masking polygon in three quadrants.
-
-        :param context: The build context.
         """
         start_angle = self.start_angle
         end_angle = self.end_angle
         phi = Angle.normalize((start_angle - end_angle) / 2.0, 90.0)
 
-        size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
+        size1 = math.sqrt(2.0) * self.outer_radius
         size2 = size1 / (math.cos(math.radians(phi)) + math.sin(math.radians(phi)))
 
         return [Vector2.origin,
@@ -283,26 +276,22 @@ class CircleSector(ScadWidget):
                 Vector2.from_polar_coordinates(size2, end_angle)]
 
     # ----------------------------------------------------------------------------------------------------------------------
-    def _polygon_in_q4(self, context: Context) -> List[Vector2]:
+    def _polygon_in_q4(self) -> List[Vector2]:
         """
         Returns a masking polygon in four quadrants.
-
-        :param context: The build context.
         """
-        return self._polygon_in_q3(context)
+        return self._polygon_in_q3()
 
     # ----------------------------------------------------------------------------------------------------------------------
-    def _polygon_is_q1(self, context: Context) -> List[Vector2]:
+    def _polygon_is_q1(self) -> List[Vector2]:
         """
         Returns a masking polygon that is exactly one quadrant.
-
-        :param context: The build context.
         """
         start_angle = self.start_angle
         end_angle = self.end_angle
 
-        size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
-        size2 = self.outer_radius + context.eps
+        size1 = math.sqrt(2.0) * self.outer_radius
+        size2 = self.outer_radius
 
         return [Vector2.origin,
                 Vector2.from_polar_coordinates(size2, start_angle),
@@ -310,17 +299,15 @@ class CircleSector(ScadWidget):
                 Vector2.from_polar_coordinates(size2, end_angle)]
 
     # ----------------------------------------------------------------------------------------------------------------------
-    def _polygon_is_q2(self, context: Context) -> List[Vector2]:
+    def _polygon_is_q2(self) -> List[Vector2]:
         """
         Returns a masking polygon that is exactly two quadrants.
-
-        :param context: The build context.
         """
         start_angle = self.start_angle
         end_angle = self.end_angle
 
-        size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
-        size2 = self.outer_radius + context.eps
+        size1 = math.sqrt(2.0) * self.outer_radius
+        size2 = self.outer_radius
 
         return [Vector2.from_polar_coordinates(size2, start_angle),
                 Vector2.from_polar_coordinates(size1, start_angle + 45.0),
@@ -328,17 +315,15 @@ class CircleSector(ScadWidget):
                 Vector2.from_polar_coordinates(size2, end_angle)]
 
     # ----------------------------------------------------------------------------------------------------------------------
-    def _polygon_is_q3(self, context: Context) -> List[Vector2]:
+    def _polygon_is_q3(self) -> List[Vector2]:
         """
         Returns a masking polygon that is exactly three quadrants.
-
-        :param context: The build context.
         """
         start_angle = self.start_angle
         end_angle = self.end_angle
 
-        size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
-        size2 = self.outer_radius + context.eps
+        size1 = math.sqrt(2.0) * self.outer_radius
+        size2 = self.outer_radius
 
         return [Vector2.origin,
                 Vector2.from_polar_coordinates(size2, start_angle),

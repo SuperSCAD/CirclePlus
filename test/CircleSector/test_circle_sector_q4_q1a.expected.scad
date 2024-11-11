@@ -1,4 +1,6 @@
 // Unit of length: Unit.MM
+$fn = 360;
+
 intersection()
 {
    difference()
@@ -6,5 +8,5 @@ intersection()
       circle(d = 60.0);
       circle(d = 20.0);
    }
-   polygon(points = [[0.0, 0.0], [30.01, -5.2916], [30.01, 5.2916]], convexity = 1);
+   polygon(points = [[0.0, 0.0], [30.0, -5.2898], [30.1, -5.2898], [30.1, 5.2898], [30.0, 5.2898]], convexity = 1);
 }

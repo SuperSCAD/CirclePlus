@@ -23,7 +23,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=10.0, end_angle=80.0, inner_radius=10.0, outer_radius=30.0, fn4n=True)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -48,7 +48,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context(fn=360, eps=.1))
+        scad = Scad(context=Context(fn=360, eps=0.1))
 
         circle_sector1 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0)
         circle_sector2 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0, extend_legs_by_eps=True)
@@ -166,7 +166,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=10.0, end_angle=80.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -190,7 +190,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=100.0, end_angle=170.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -214,7 +214,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=190.0, end_angle=260.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -238,7 +238,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=280.0, end_angle=350.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -262,7 +262,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=0.0, end_angle=90.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -286,7 +286,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=90.0, end_angle=180.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -310,7 +310,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=180.0, end_angle=270.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -334,7 +334,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=270.0, end_angle=360.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -358,7 +358,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=0.0, end_angle=180.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -382,7 +382,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=90.0, end_angle=270.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -406,7 +406,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=180.0, end_angle=360.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -430,7 +430,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=270.0, end_angle=90.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -454,7 +454,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=0.0, end_angle=270.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -478,7 +478,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=90.0, end_angle=360.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -502,7 +502,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=180.0, end_angle=90.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -526,7 +526,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=270.0, end_angle=180.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -550,7 +550,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=0.0, end_angle=360.0 - 1e-8, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -574,7 +574,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=80.0, end_angle=100.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -598,7 +598,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=170.0, end_angle=190.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -622,7 +622,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=260.0, end_angle=280.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -646,7 +646,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=180.01, end_angle=89.99, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -670,7 +670,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=269.99, end_angle=0.01, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -694,7 +694,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=350.0, end_angle=370.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -718,7 +718,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=270.01, end_angle=89.99, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -742,7 +742,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=15.0, end_angle=265.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -766,7 +766,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=0.01, end_angle=269.99, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -790,7 +790,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=89.99, end_angle=180.01, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -814,7 +814,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=105, end_angle=355.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -838,7 +838,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=90.01, end_angle=-0.01, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -862,7 +862,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=179.99, end_angle=-89.99, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -886,7 +886,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(angle=-20, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -910,7 +910,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(angle=20, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -934,7 +934,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=25, end_angle=15, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -958,7 +958,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=25, end_angle=0.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -982,7 +982,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=110, end_angle=95, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -1006,7 +1006,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=269, end_angle=181, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -1030,7 +1030,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=-30, end_angle=-40, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -1054,7 +1054,7 @@ class CircleSectorTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = CircleSector(start_angle=0.0, end_angle=-40, radius=30.0)
 
         self.assertAlmostEqual(30.0, circle_sector.radius)
@@ -1075,7 +1075,7 @@ class CircleSectorTest(ScadTestCase):
     def test_imperial_metric_circle_sector(self):
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context())
+        scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector = ImperialCircleSector(start_angle=15.0,
                                              end_angle=-15.0,
                                              radius=30.0,
@@ -1105,7 +1105,7 @@ class CircleSectorTest(ScadTestCase):
     def test_imperial_imperial_circle_sector(self):
         path_actual, path_expected = self.paths()
 
-        scad = Scad(context=Context(unit_length_final=Unit.INCH))
+        scad = Scad(context=Context(unit_length_final=Unit.INCH, fn=360, eps=0.1))
         circle_sector = ImperialCircleSector(start_angle=15.0,
                                              end_angle=-15.0,
                                              radius=30.0,

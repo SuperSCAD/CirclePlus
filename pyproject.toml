@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "Super-SCAD-Circle-Sector"
-version = "0.9.5"
+version = "0.9.6"
 description = "SuperSCAD widget for circle sectors."
 authors = ["P.R. Water <p.r.water@setbased.nl>"]
 license = "MIT"

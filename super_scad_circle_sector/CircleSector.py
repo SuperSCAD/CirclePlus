@@ -1,5 +1,5 @@
 import math
-from typing import List
+from typing import List, Tuple
 
 from super_scad.boolean.Difference import Difference
 from super_scad.boolean.Empty import Empty
@@ -27,7 +27,7 @@ class CircleSector(ScadWidget):
                  radius: float | None = None,
                  inner_radius: float | None = None,
                  outer_radius: float | None = None,
-                 extend_legs_by_eps: bool | None = None,
+                 extend_legs_by_eps: bool | Tuple[bool, bool] | None = None,
                  fa: float | None = None,
                  fs: float | None = None,
                  fn: int | None = None,
@@ -49,6 +49,11 @@ class CircleSector(ScadWidget):
         :param fn4n: Whether to create a circle with a multiple of 4 vertices.
         """
         ScadWidget.__init__(self, args=locals())
+
+        self._extend_legs_by_eps: bool | Tuple[bool, bool] | None = extend_legs_by_eps
+        """
+        Whether to extend the "legs", i.e., the straight sides of the circle sector, by eps for a clear overlap.
+        """
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
@@ -116,11 +121,22 @@ class CircleSector(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def extend_legs_by_eps(self) -> bool:
+    def extend_legs_by_eps(self) -> Tuple[bool, bool]:
         """
         Returns whether to extend the "legs", i.e., the straight sides of the circle sector, by eps for a clear overlap.
         """
-        return self._args.get('extend_legs_by_eps', False)
+        if not isinstance(self._extend_legs_by_eps, Tuple):
+            if self._extend_legs_by_eps is None:
+                self._extend_legs_by_eps = (False, False)
+
+            elif isinstance(self._extend_legs_by_eps, bool):
+                self._extend_legs_by_eps = (self._extend_legs_by_eps, self._extend_legs_by_eps)
+
+            else:
+                raise ValueError('Expect extend_legs_by_eps to be a boolean or a tuple of two booleans, '
+                                 f'got {type(self._extend_legs_by_eps)}')
+
+        return self._extend_legs_by_eps
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -215,8 +231,9 @@ class CircleSector(ScadWidget):
             raise ValueError('Math is broken!')
 
         extend_sides_by_eps = {index for index in range(len(points))}
-        if not self.extend_legs_by_eps:
+        if not self.extend_legs_by_eps[0]:
             extend_sides_by_eps.remove(0)
+        if not self.extend_legs_by_eps[1]:
             extend_sides_by_eps.remove(len(points) - 1)
 
         return Intersection(children=[circles,

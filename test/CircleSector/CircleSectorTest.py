@@ -160,6 +160,46 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
+    def test_circle_sector_extend_start_leg_by_eps(self):
+        """
+        Test a circle sector that is 70 degrees and with the start leg extended by eps.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(context=Context(fn=360, eps=0.1))
+
+        circle_sector1 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0)
+        circle_sector2 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0, extend_legs_by_eps=(True, False))
+
+        diff = Difference(children=[Paint(color=Color('red'),
+                                          child=circle_sector2),
+                                    circle_sector1])
+        scad.run_super_scad(diff, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_circle_sector_extend_end_leg_by_eps(self):
+        """
+        Test a circle sector that is 70 degrees and with the start leg extended by eps.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(context=Context(fn=360, eps=0.1))
+
+        circle_sector1 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0)
+        circle_sector2 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0, extend_legs_by_eps=(False, True))
+
+        diff = Difference(children=[Paint(color=Color('red'),
+                                          child=circle_sector2),
+                                    circle_sector1])
+        scad.run_super_scad(diff, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
     def test_circle_sector_in_q1(self):
         """
         Test a circle sector that start lies quadrant 1.

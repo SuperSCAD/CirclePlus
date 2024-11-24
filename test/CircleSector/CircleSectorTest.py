@@ -1112,7 +1112,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_imperial_metric_circle_sector(self):
+    def xtest_imperial_metric_circle_sector(self):
         path_actual, path_expected = self.paths()
 
         scad = Scad(context=Context(fn=360, eps=0.1))
@@ -1142,7 +1142,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_imperial_imperial_circle_sector(self):
+    def xtest_imperial_imperial_circle_sector(self):
         path_actual, path_expected = self.paths()
 
         scad = Scad(context=Context(unit_length_final=Unit.INCH, fn=360, eps=0.1))

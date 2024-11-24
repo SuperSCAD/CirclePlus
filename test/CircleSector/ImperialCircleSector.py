@@ -25,7 +25,17 @@ class ImperialCircleSector(ScadWidget):
         """
         Object constructor.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
+        
+        self._angle = angle
+        self._start_angle = start_angle
+        self._end_angle = end_angle
+        self._radius = radius
+        self._inner_radius = inner_radius
+        self._outer_radius = outer_radius
+        self._fa = fa
+        self._fs = fs
+        self._fn = fn
 
         self.imperial_circle_sector: CircleSector | None = None
         """
@@ -41,15 +51,15 @@ class ImperialCircleSector(ScadWidget):
         """
         Context.set_unit_length_current(Unit.INCH)
 
-        self.imperial_circle_sector = CircleSector(angle=self._args.get('angle'),
-                                                   start_angle=self._args.get('start_angle'),
-                                                   end_angle=self._args.get('end_angle'),
-                                                   radius=self._args.get('radius'),
-                                                   inner_radius=self._args.get('inner_radius'),
-                                                   outer_radius=self._args.get('outer_radius'),
-                                                   fa=self._args.get('fa'),
-                                                   fs=self._args.get('fs'),
-                                                   fn=self._args.get('fn'))
+        self.imperial_circle_sector = CircleSector(angle=self._angle,
+                                                   start_angle=self._start_angle,
+                                                   end_angle=self._end_angle,
+                                                   radius=self._radius,
+                                                   inner_radius=self._inner_radius,
+                                                   outer_radius=self._outer_radius,
+                                                   fa=self._fa,
+                                                   fs=self._fs,
+                                                   fn=self._fn)
 
         return self.imperial_circle_sector
 

@@ -1,12 +1,12 @@
 import math
-from typing import List, Tuple
+from typing import Any, Dict, List, Tuple
 
 from super_scad.boolean.Difference import Difference
 from super_scad.boolean.Empty import Empty
 from super_scad.boolean.Intersection import Intersection
 from super_scad.d2.Circle import Circle
 from super_scad.d2.Polygon import Polygon
-from super_scad.scad.ArgumentAdmission import ArgumentAdmission
+from super_scad.scad.ArgumentValidator import ArgumentValidator
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Angle import Angle
@@ -48,22 +48,80 @@ class CircleSector(ScadWidget):
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         :param fn4n: Whether to create a circle with a multiple of 4 vertices.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
+
+        self._angle: float | None = angle
+        """
+        The angle of the circle sector (implies the starting angle is 0.0).
+        """
+
+        self._start_angle: float | None = start_angle
+        """
+        The start angle of the circle sector.
+        """
+
+        self._end_angle: float | None = end_angle
+        """
+        The end angle of the circle sector.
+        """
+
+        self._radius: float | None = radius
+        """
+        The radius of the circle sector (implies inner radius is 0.0).
+        """
+
+        self._inner_radius: float | None = inner_radius
+        """
+        The inner radius of the circle sector.
+        """
+
+        self._outer_radius: float | None = outer_radius
+        """
+        The outer radius of the circle sector.
+        """
+
+        self._extend_legs_by_eps: bool | Tuple[bool, bool] | None = extend_legs_by_eps
+        """
+        Whether to extend the "legs", i.e., the straight sides of the circle sector.
+        """
+
+        self._fa: float | None = fa
+        """
+        The minimum angle (in degrees) of each fragment.
+        """
+
+        self._fs: float | None = fa
+        """
+        The minimum circumferential length of each fragment.
+        """
+
+        self._fn: int | None = fn
+        """
+        The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
+        """
+
+        self._fn4n: bool | None = fn4n
+        """
+        Whether to create a circle with a multiple of 4 vertices.
+        """
 
         self._extend_legs_by_eps: bool | Tuple[bool, bool] | None = extend_legs_by_eps
         """
         Whether to extend the "legs", i.e., the straight sides of the circle sector, by eps for a clear overlap.
         """
 
+        self._validate_arguments(locals())
+
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
+    @staticmethod
+    def _validate_arguments(args: Dict[str, Any]) -> None:
         """
         Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
-        admission = ArgumentAdmission(self._args)
-        admission.validate_exclusive({'angle'}, {'start_angle', 'end_angle'})
-        admission.validate_exclusive({'radius'}, {'inner_radius', 'outer_radius'})
-        admission.validate_required({'radius', 'outer_radius'}, {'angle', 'end_angle'})
+        validator = ArgumentValidator(args)
+        validator.validate_exclusive({'angle'}, {'start_angle', 'end_angle'})
+        validator.validate_exclusive({'radius'}, {'inner_radius', 'outer_radius'})
+        validator.validate_required({'radius', 'outer_radius'}, {'angle', 'end_angle'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -79,10 +137,10 @@ class CircleSector(ScadWidget):
         """
         Returns the start angle of the circle sector.
         """
-        if 'angle' in self._args:
-            return Angle.normalize(self._args['angle']) if self._args['angle'] < 0.0 else 0.0
+        if self._start_angle is None:
+            self._start_angle = Angle.normalize(self._angle) if self._angle < 0.0 else 0.0
 
-        return Angle.normalize(self._args['start_angle'])
+        return Angle.normalize(self._start_angle)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -90,10 +148,10 @@ class CircleSector(ScadWidget):
         """
         Returns the end angle of the circle sector.
         """
-        if 'angle' in self._args:
-            return Angle.normalize(self._args['angle']) if self._args['angle'] > 0.0 else 0.0
+        if self._end_angle is None:
+            self._end_angle = self._angle if self._angle > 0.0 else 0.0
 
-        return Angle.normalize(self._args['end_angle'])
+        return Angle.normalize(self._end_angle)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -101,7 +159,10 @@ class CircleSector(ScadWidget):
         """
         Returns the outer radius of the circle sector.
         """
-        return self.outer_radius
+        if self._radius is None:
+            self._radius = self._outer_radius
+
+        return self._radius
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -109,7 +170,10 @@ class CircleSector(ScadWidget):
         """
         Returns the inner radius of this circle sector.
         """
-        return self.uc(self._args.get('inner_radius', 0.0))
+        if self._inner_radius is None:
+            self._inner_radius = 0.0
+
+        return self._inner_radius
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -117,7 +181,10 @@ class CircleSector(ScadWidget):
         """
         Returns the outer radius of this circle sector.
         """
-        return self.uc(self._args.get('outer_radius', self._args.get('radius', 0.0)))
+        if self._outer_radius is None:
+            self._outer_radius = self._radius
+
+        return self._outer_radius
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -144,7 +211,7 @@ class CircleSector(ScadWidget):
         """
         Returns the minimum angle (in degrees) of each fragment.
         """
-        return self._args.get('fa')
+        return self._fa
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -152,7 +219,7 @@ class CircleSector(ScadWidget):
         """
         Returns the minimum circumferential length of each fragment.
         """
-        return self.uc(self._args.get('fs'))
+        return self._fs
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -160,7 +227,7 @@ class CircleSector(ScadWidget):
         """
         Returns whether to create a circle with multiple of 4 vertices.
         """
-        return self._args.get('fn4n')
+        return self._fn4n
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -168,7 +235,7 @@ class CircleSector(ScadWidget):
         """
         Returns the fixed number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
         """
-        return self._args.get('fn')
+        return self._fn
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

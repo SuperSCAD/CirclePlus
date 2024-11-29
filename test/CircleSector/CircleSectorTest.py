@@ -42,7 +42,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_circle_sector_070_extend_legs_by_eps(self):
+    def test_circle_sector_070_extend_by_eps_legs(self):
         """
         Test a circle sector that is 70 degrees and with legs extended by eps.
         """
@@ -51,7 +51,7 @@ class CircleSectorTest(ScadTestCase):
         scad = Scad(context=Context(fn=360, eps=0.1))
 
         circle_sector1 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0)
-        circle_sector2 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0, extend_legs_by_eps=True)
+        circle_sector2 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0, extend_by_eps_legs=True)
 
         diff = Difference(children=[Paint(color=Color('red'),
                                           child=circle_sector2),
@@ -62,7 +62,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_circle_sector_090_extend_legs_by_eps(self):
+    def test_circle_sector_090_extend_by_eps_legs(self):
         """
         Test a circle sector that is 90 degrees and with legs extended by eps.
         """
@@ -70,7 +70,7 @@ class CircleSectorTest(ScadTestCase):
 
         scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector1 = CircleSector(start_angle=10.0, end_angle=100.0, radius=10.0)
-        circle_sector2 = CircleSector(start_angle=10.0, end_angle=100.0, radius=10.0, extend_legs_by_eps=True)
+        circle_sector2 = CircleSector(start_angle=10.0, end_angle=100.0, radius=10.0, extend_by_eps_legs=True)
 
         diff = Difference(children=[Paint(color=Color('red'),
                                           child=circle_sector2),
@@ -81,7 +81,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_circle_sector_160_extend_legs_by_eps(self):
+    def test_circle_sector_160_extend_by_eps_legs(self):
         """
         Test a circle sector that is 160 degrees and with legs extended by eps.
         """
@@ -90,7 +90,7 @@ class CircleSectorTest(ScadTestCase):
         scad = Scad(context=Context(fn=360, eps=0.1))
 
         circle_sector1 = CircleSector(start_angle=10.0, end_angle=170.0, radius=10.0)
-        circle_sector2 = CircleSector(start_angle=10.0, end_angle=170.0, radius=10.0, extend_legs_by_eps=True)
+        circle_sector2 = CircleSector(start_angle=10.0, end_angle=170.0, radius=10.0, extend_by_eps_legs=True)
 
         diff = Difference(children=[Paint(color=Color('red'),
                                           child=circle_sector2),
@@ -101,7 +101,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_circle_sector_180_extend_legs_by_eps(self):
+    def test_circle_sector_180_extend_by_eps_legs(self):
         """
         Test a circle sector that is 180 degrees and with legs extended by eps.
         """
@@ -109,7 +109,7 @@ class CircleSectorTest(ScadTestCase):
 
         scad = Scad(context=Context(fn=360, eps=0.1))
         circle_sector1 = CircleSector(start_angle=10.0, end_angle=190.0, radius=10.0)
-        circle_sector2 = CircleSector(start_angle=10.0, end_angle=190.0, radius=10.0, extend_legs_by_eps=True)
+        circle_sector2 = CircleSector(start_angle=10.0, end_angle=190.0, radius=10.0, extend_by_eps_legs=True)
 
         diff = Difference(children=[Paint(color=Color('red'),
                                           child=circle_sector2),
@@ -120,7 +120,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_circle_sector_250_extend_legs_by_eps(self):
+    def test_circle_sector_250_extend_by_eps_legs(self):
         """
         Test a circle sector that is 250 degrees and with legs extended by eps.
         """
@@ -129,7 +129,7 @@ class CircleSectorTest(ScadTestCase):
         scad = Scad(context=Context(fn=360, eps=0.1))
 
         circle_sector1 = CircleSector(start_angle=10.0, end_angle=260.0, radius=10.0)
-        circle_sector2 = CircleSector(start_angle=10.0, end_angle=260.0, radius=10.0, extend_legs_by_eps=True)
+        circle_sector2 = CircleSector(start_angle=10.0, end_angle=260.0, radius=10.0, extend_by_eps_legs=True)
 
         diff = Difference(children=[Paint(color=Color('red'),
                                           child=circle_sector2),
@@ -140,7 +140,7 @@ class CircleSectorTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_circle_sector_340_extend_legs_by_eps(self):
+    def test_circle_sector_340_extend_by_eps_legs(self):
         """
         Test a circle sector that is 340 degrees and with legs extended by eps.
         """
@@ -149,7 +149,7 @@ class CircleSectorTest(ScadTestCase):
         scad = Scad(context=Context(fn=360, eps=0.1))
 
         circle_sector1 = CircleSector(start_angle=5.0, end_angle=350.0, radius=10.0)
-        circle_sector2 = CircleSector(start_angle=5.0, end_angle=350.0, radius=10.0, extend_legs_by_eps=True)
+        circle_sector2 = CircleSector(start_angle=5.0, end_angle=350.0, radius=10.0, extend_by_eps_legs=True)
 
         diff = Difference(children=[Paint(color=Color('red'),
                                           child=circle_sector2),
@@ -169,7 +169,7 @@ class CircleSectorTest(ScadTestCase):
         scad = Scad(context=Context(fn=360, eps=0.1))
 
         circle_sector1 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0)
-        circle_sector2 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0, extend_legs_by_eps=(True, False))
+        circle_sector2 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0, extend_by_eps_legs=(True, False))
 
         diff = Difference(children=[Paint(color=Color('red'),
                                           child=circle_sector2),
@@ -189,7 +189,7 @@ class CircleSectorTest(ScadTestCase):
         scad = Scad(context=Context(fn=360, eps=0.1))
 
         circle_sector1 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0)
-        circle_sector2 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0, extend_legs_by_eps=(False, True))
+        circle_sector2 = CircleSector(start_angle=10.0, end_angle=80.0, radius=10.0, extend_by_eps_legs=(False, True))
 
         diff = Difference(children=[Paint(color=Color('red'),
                                           child=circle_sector2),

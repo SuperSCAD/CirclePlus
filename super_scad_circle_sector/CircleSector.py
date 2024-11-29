@@ -27,7 +27,7 @@ class CircleSector(ScadWidget):
                  radius: float | None = None,
                  inner_radius: float | None = None,
                  outer_radius: float | None = None,
-                 extend_legs_by_eps: bool | Tuple[bool, bool] | None = None,
+                 extend_by_eps_legs: bool | Tuple[bool, bool] | None = None,
                  fa: float | None = None,
                  fs: float | None = None,
                  fn: int | None = None,
@@ -41,7 +41,7 @@ class CircleSector(ScadWidget):
         :param radius: The radius of the circle sector (implies inner radius is 0.0).
         :param inner_radius: The inner radius of the circle sector.
         :param outer_radius: The outer radius of the circle sector.
-        :param extend_legs_by_eps: Whether to extend the "legs", i.e., the straight sides of the circle sector, by eps
+        :param extend_by_eps_legs: Whether to extend the "legs", i.e., the straight sides of the circle sector, by eps
                                    for a clear overlap.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
@@ -80,7 +80,7 @@ class CircleSector(ScadWidget):
         The outer radius of the circle sector.
         """
 
-        self._extend_legs_by_eps: bool | Tuple[bool, bool] | None = extend_legs_by_eps
+        self._extend_by_eps_legs: bool | Tuple[bool, bool] | None = extend_by_eps_legs
         """
         Whether to extend the "legs", i.e., the straight sides of the circle sector.
         """
@@ -105,7 +105,7 @@ class CircleSector(ScadWidget):
         Whether to create a circle with a multiple of 4 vertices.
         """
 
-        self._extend_legs_by_eps: bool | Tuple[bool, bool] | None = extend_legs_by_eps
+        self._extend_by_eps_legs: bool | Tuple[bool, bool] | None = extend_by_eps_legs
         """
         Whether to extend the "legs", i.e., the straight sides of the circle sector, by eps for a clear overlap.
         """
@@ -188,22 +188,22 @@ class CircleSector(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def extend_legs_by_eps(self) -> Tuple[bool, bool]:
+    def extend_by_eps_legs(self) -> Tuple[bool, bool]:
         """
         Returns whether to extend the "legs", i.e., the straight sides of the circle sector, by eps for a clear overlap.
         """
-        if not isinstance(self._extend_legs_by_eps, Tuple):
-            if self._extend_legs_by_eps is None:
-                self._extend_legs_by_eps = (False, False)
+        if not isinstance(self._extend_by_eps_legs, Tuple):
+            if self._extend_by_eps_legs is None:
+                self._extend_by_eps_legs = (False, False)
 
-            elif isinstance(self._extend_legs_by_eps, bool):
-                self._extend_legs_by_eps = (self._extend_legs_by_eps, self._extend_legs_by_eps)
+            elif isinstance(self._extend_by_eps_legs, bool):
+                self._extend_by_eps_legs = (self._extend_by_eps_legs, self._extend_by_eps_legs)
 
             else:
-                raise ValueError('Expect extend_legs_by_eps to be a boolean or a tuple of two booleans, '
-                                 f'got {type(self._extend_legs_by_eps)}')
+                raise ValueError('Expect extend_by_eps_legs to be a boolean or a tuple of two booleans, '
+                                 f'got {type(self._extend_by_eps_legs)}')
 
-        return self._extend_legs_by_eps
+        return self._extend_by_eps_legs
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -297,16 +297,16 @@ class CircleSector(ScadWidget):
         else:
             raise ValueError('Math is broken!')
 
-        extend_sides_by_eps = {index for index in range(len(points))}
-        if not self.extend_legs_by_eps[0]:
-            extend_sides_by_eps.remove(0)
-        if not self.extend_legs_by_eps[1]:
-            extend_sides_by_eps.remove(len(points) - 1)
+        extend_by_eps_sides = {index for index in range(len(points))}
+        if not self.extend_by_eps_legs[0]:
+            extend_by_eps_sides.remove(0)
+        if not self.extend_by_eps_legs[1]:
+            extend_by_eps_sides.remove(len(points) - 1)
 
         return Intersection(children=[circles,
                                       Polygon(points=points,
                                               convexity=self.convexity,
-                                              extend_sides_by_eps=extend_sides_by_eps)])
+                                              extend_by_eps_sides=extend_by_eps_sides)])
 
     # ----------------------------------------------------------------------------------------------------------------------
     def _polygon_in_q1(self) -> List[Vector2]:

@@ -90,7 +90,7 @@ class CircleSector(ScadWidget):
         The minimum angle (in degrees) of each fragment.
         """
 
-        self._fs: float | None = fa
+        self._fs: float | None = fs
         """
         The minimum circumferential length of each fragment.
         """

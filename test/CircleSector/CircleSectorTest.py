@@ -1,12 +1,11 @@
 from super_scad.boolean.Difference import Difference
-from super_scad.boolean.Union import Union
 from super_scad.scad.Context import Context
 from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
 from super_scad.transformation.Paint import Paint
 from super_scad.type.Color import Color
 
-from super_scad_circle_sector.CircleSector import CircleSector
+from super_scad_circle_plus.CircleSector import CircleSector
 from test.CircleSector.ImperialCircleSector import ImperialCircleSector
 from test.ScadTestCase import ScadTestCase
 

@@ -1,5 +1,5 @@
 <project name="SuperSCAD" default="build" basedir=".">
-    <taskdef name="readSemanticVersion" classname="vendor.setbased.phing-extensions.src.Task.ReadSemanticVersionTask"/>
+    <taskdef name="readSemanticVersion" classname="\SetBased\Phing\Task\ReadSemanticVersionTask"/>
     <property name="BUILD_DIR" value="./build"/>
 
     <!-- Run composer update and executes various other updates -->
@@ -119,13 +119,6 @@
                 <include name="**/*.actual.scad"/>
             </fileset>
         </delete>
-    </target>
-
-    <!-- Generates the documentation -->
-    <target name="docs">
-        <exec command="sphinx-apidoc -o api --force --doc-project API --no-toc ../super_scad" dir="docs"
-              passthru="true" checkreturn="true"/>
-        <exec command="make html" dir="docs" passthru="true" checkreturn="true"/>
     </target>
 
     <!-- Default target -->

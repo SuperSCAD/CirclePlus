@@ -1,7 +1,7 @@
 [run]
 branch = True
 data_file = .coverage
-source = super_scad_circle_sector
+source = super_scad_circle_plus
 omit = test/*
 
 [report]

@@ -320,8 +320,8 @@ class CircleSector(ScadWidget):
         size2 = self.outer_radius / math.cos(math.radians(phi))
 
         return [Vector2(0.0, 0.0),
-                Vector2.from_polar_coordinates(size2, start_angle),
-                Vector2.from_polar_coordinates(size2, end_angle)]
+                Vector2.from_polar(size2, start_angle),
+                Vector2.from_polar(size2, end_angle)]
 
     # ----------------------------------------------------------------------------------------------------------------------
     def _polygon_in_q2(self) -> List[Vector2]:
@@ -336,9 +336,9 @@ class CircleSector(ScadWidget):
         size2 = size1 / (math.cos(math.radians(phi)) + math.sin(math.radians(phi)))
 
         return [Vector2.origin,
-                Vector2.from_polar_coordinates(size2, start_angle),
-                Vector2.from_polar_coordinates(size1, start_angle - phi + 90.0),
-                Vector2.from_polar_coordinates(size2, end_angle)]
+                Vector2.from_polar(size2, start_angle),
+                Vector2.from_polar(size1, start_angle - phi + 90.0),
+                Vector2.from_polar(size2, end_angle)]
 
     # ----------------------------------------------------------------------------------------------------------------------
     def _polygon_in_q3(self) -> List[Vector2]:
@@ -353,11 +353,11 @@ class CircleSector(ScadWidget):
         size2 = size1 / (math.cos(math.radians(phi)) + math.sin(math.radians(phi)))
 
         return [Vector2.origin,
-                Vector2.from_polar_coordinates(size2, start_angle),
-                Vector2.from_polar_coordinates(size1, start_angle - phi + 90.0),
-                Vector2.from_polar_coordinates(size1, start_angle - phi + 180.0),
-                Vector2.from_polar_coordinates(size1, start_angle - phi + 270.0),
-                Vector2.from_polar_coordinates(size2, end_angle)]
+                Vector2.from_polar(size2, start_angle),
+                Vector2.from_polar(size1, start_angle - phi + 90.0),
+                Vector2.from_polar(size1, start_angle - phi + 180.0),
+                Vector2.from_polar(size1, start_angle - phi + 270.0),
+                Vector2.from_polar(size2, end_angle)]
 
     # ----------------------------------------------------------------------------------------------------------------------
     def _polygon_in_q4(self) -> List[Vector2]:
@@ -378,9 +378,9 @@ class CircleSector(ScadWidget):
         size2 = self.outer_radius
 
         return [Vector2.origin,
-                Vector2.from_polar_coordinates(size2, start_angle),
-                Vector2.from_polar_coordinates(size1, start_angle + 45.0),
-                Vector2.from_polar_coordinates(size2, end_angle)]
+                Vector2.from_polar(size2, start_angle),
+                Vector2.from_polar(size1, start_angle + 45.0),
+                Vector2.from_polar(size2, end_angle)]
 
     # ----------------------------------------------------------------------------------------------------------------------
     def _polygon_is_q2(self) -> List[Vector2]:
@@ -393,10 +393,10 @@ class CircleSector(ScadWidget):
         size1 = math.sqrt(2.0) * self.outer_radius
         size2 = self.outer_radius
 
-        return [Vector2.from_polar_coordinates(size2, start_angle),
-                Vector2.from_polar_coordinates(size1, start_angle + 45.0),
-                Vector2.from_polar_coordinates(size1, start_angle + 135.0),
-                Vector2.from_polar_coordinates(size2, end_angle)]
+        return [Vector2.from_polar(size2, start_angle),
+                Vector2.from_polar(size1, start_angle + 45.0),
+                Vector2.from_polar(size1, start_angle + 135.0),
+                Vector2.from_polar(size2, end_angle)]
 
     # ----------------------------------------------------------------------------------------------------------------------
     def _polygon_is_q3(self) -> List[Vector2]:
@@ -410,10 +410,10 @@ class CircleSector(ScadWidget):
         size2 = self.outer_radius
 
         return [Vector2.origin,
-                Vector2.from_polar_coordinates(size2, start_angle),
-                Vector2.from_polar_coordinates(size1, start_angle + 45.0),
-                Vector2.from_polar_coordinates(size1, start_angle + 135.0),
-                Vector2.from_polar_coordinates(size1, start_angle + 225.0),
-                Vector2.from_polar_coordinates(size2, end_angle)]
+                Vector2.from_polar(size2, start_angle),
+                Vector2.from_polar(size1, start_angle + 45.0),
+                Vector2.from_polar(size1, start_angle + 135.0),
+                Vector2.from_polar(size1, start_angle + 225.0),
+                Vector2.from_polar(size2, end_angle)]
 
 # ----------------------------------------------------------------------------------------------------------------------

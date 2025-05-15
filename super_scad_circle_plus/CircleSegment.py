@@ -412,7 +412,7 @@ class CircleSegment(ScadWidget):
         """
         central_angle = self.central_angle
         if self.extend_by_eps_cord:
-            vector = Vector2.from_polar_coordinates(self.radius, 90.0 - 0.5 * central_angle)
+            vector = Vector2.from_polar(self.radius, 90.0 - 0.5 * central_angle)
             vector += Vector2(0.0, -context.eps if self.minor_segment else context.eps)
             central_angle = math.degrees(2.0 * math.acos(vector.y / self.radius))
 

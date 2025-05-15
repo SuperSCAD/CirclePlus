@@ -1,5 +1,3 @@
-from lib2to3.fixes.fix_input import context
-
 from super_scad.scad.Context import Context
 from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit

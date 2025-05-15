@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "Super-SCAD-Circle-Plus"
-version = "0.9.9"
+version = "0.9.10"
 description = "SuperSCAD widget for circle sectors, circle segments, ellipses and ellipsoids."
 authors = ["P.R. Water <p.r.water@setbased.nl>"]
 license = "MIT"
